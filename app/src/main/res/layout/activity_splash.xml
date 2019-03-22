@@ -18,14 +18,11 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Lindera"
-            android:textStyle="bold"
-            android:textSize="32dp"
-            android:textColor="#FFFFFF" />
+            android:src="@mipmap/lindera_logo_white"/>
 
     </RelativeLayout>
 </layout>

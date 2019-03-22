@@ -7,4 +7,7 @@ import com.linderaredux.utils.Session
 
 class LandingViewModel(linderaService: LinderaService, session: Session) : BaseViewModel<LandingNavigator>(linderaService, session) {
 
+    fun onLoginButtonClick(){
+        getNavigator()!!.onLoginScreen()
+    }
 }

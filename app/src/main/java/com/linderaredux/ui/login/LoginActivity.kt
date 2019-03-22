@@ -1,4 +1,4 @@
-package com.linderaredux.ui.landing
+package com.linderaredux.ui.login
 
 import android.content.Context
 import android.content.Intent
@@ -8,22 +8,21 @@ import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityLandingBinding
-import com.linderaredux.ui.login.LoginActivity
+import com.linderaredux.databinding.ActivityLoginBinding
 import javax.inject.Inject
 
-class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>(), LandingNavigator {
-
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), LoginNavigator {
 
     companion object {
         fun newIntent(context: Context): Intent {
-            return Intent(context, LandingActivity::class.java)
+            return Intent(context, LoginActivity::class.java)
         }
     }
 
     @set:Inject
-    override var viewModel: LandingViewModel? = null
+    override var viewModel: LoginViewModel? = null
 
-    private var mActivityLandingBinding: ActivityLandingBinding? = null
+    private var mActivityLoginBinding: ActivityLoginBinding? = null
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -32,24 +31,12 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
         get() = false
 
     override val layoutId: Int
-        get() = R.layout.activity_landing
+        get() = R.layout.activity_login
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mActivityLandingBinding = getViewDataBinding()
+        mActivityLoginBinding = getViewDataBinding()
         viewModel?.setNavigator(this)
-
-        setUpTutorialPage()
-    }
-
-    private fun setUpTutorialPage() {
-
-    }
-
-
-    override fun onLoginScreen() {
-        val intent = LoginActivity.newIntent(this)
-        startActivity(intent)
     }
 
     override fun handleError(error: String) {
