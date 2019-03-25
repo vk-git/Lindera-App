@@ -24,6 +24,9 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
     @set:Inject
     override var viewModel: LandingViewModel? = null
 
+    @set:Inject
+    var mCustomPagerAdapter: CustomPagerAdapter? = null
+
     private var mActivityLandingBinding: ActivityLandingBinding? = null
 
     override val bindingVariable: Int
@@ -40,11 +43,9 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
         mActivityLandingBinding = getViewDataBinding()
         viewModel?.setNavigator(this)
 
-        setUpTutorialPage()
-    }
-
-    private fun setUpTutorialPage() {
-        mActivityLandingBinding!!.viewPager.adapter =  CustomPagerAdapter(this)
+        mActivityLandingBinding!!.viewPager.apply {
+            adapter = mCustomPagerAdapter
+        }
     }
 
     override fun onLoginScreen() {
