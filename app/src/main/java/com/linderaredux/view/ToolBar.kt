@@ -58,9 +58,9 @@ class ToolBar : LinearLayout {
         this.toolbarTitle.text = toolbarTitle
     }
 
-     fun setBackButton(isBackButtonEnable: Boolean) {
-         toolbarLeftButton.setImageResource(if (isBackButtonEnable) R.drawable.ic_back_arrow else R.mipmap.ic_launcher)
-     }
+    fun setBackButton(isBackButtonEnable: Boolean) {
+        toolbarLeftButton.setImageResource(if (isBackButtonEnable) R.drawable.ic_back_arrow else R.drawable.ic_launcher)
+    }
 
     fun setBackButtonListener(listener: View.OnClickListener?) {
         toolbarLeftButton.setOnClickListener(listener)
