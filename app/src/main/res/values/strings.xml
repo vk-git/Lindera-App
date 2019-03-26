@@ -9,12 +9,13 @@
     <string name="landing_contact">Contact</string>
     <string name="landing_help_faq">Help/FAQ</string>
     <string name="landing_are_you_already_registered_with_lindera">Are you already registered with Lindera?</string>
-    <string name="enter_your_email_and_password">Enter your Email and Password</string>
+    <string name="enter_your_email_and_password">Axcepteur they are not excepteur ocdatat effeminate and their spirits.</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="login_CTA">Login</string>
-    <string name="register_for_free_at_lindera">Register for free at Lindera</string>
+    <string name="register_for_free_at_lindera">Register now for free at Lindera</string>
     <string name="registration_CTA">Registration</string>
     <string name="contact_lindera_CTA">Contact Lindera</string>
+    <string name="user_name">User name</string>
 </resources>

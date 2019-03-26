@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.linderaredux.BR
 import com.linderaredux.R
+import com.linderaredux.adapter.CustomPagerAdapter
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityLandingBinding
 import com.linderaredux.ui.login.LoginActivity
@@ -23,6 +24,9 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
     @set:Inject
     override var viewModel: LandingViewModel? = null
 
+    @set:Inject
+    var mCustomPagerAdapter: CustomPagerAdapter? = null
+
     private var mActivityLandingBinding: ActivityLandingBinding? = null
 
     override val bindingVariable: Int
@@ -39,13 +43,10 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
         mActivityLandingBinding = getViewDataBinding()
         viewModel?.setNavigator(this)
 
-        setUpTutorialPage()
+        mActivityLandingBinding!!.viewPager.apply {
+            adapter = mCustomPagerAdapter
+        }
     }
-
-    private fun setUpTutorialPage() {
-
-    }
-
 
     override fun onLoginScreen() {
         val intent = LoginActivity.newIntent(this)

@@ -30,17 +30,21 @@
         <LinearLayout
             android:id="@+id/loginHeaderLayout"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="170dp"
             android:layout_below="@+id/toolbar"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/slide_1"
             android:gravity="center">
 
             <TextView
+                android:gravity="center"
+                android:layout_marginStart="36dp"
+                android:layout_marginEnd="36dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/enter_your_email_and_password"
                 android:textColor="@color/white"
-                android:textSize="24dp" />
+                android:fontFamily="@font/josefinsans_semibold"
+                android:textSize="22dp" />
 
         </LinearLayout>
 
@@ -49,9 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/loginHeaderLayout"
-            android:layout_marginStart="38dp"
+            android:layout_marginStart="36dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="38dp"
+            android:layout_marginEnd="36dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -60,9 +64,10 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:fontFamily="@font/roboto_medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email_hint" />
+                    android:hint="@string/user_name" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,6 +76,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:fontFamily="@font/roboto_medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password_hint" />
@@ -83,6 +89,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@color/white"
                 android:padding="16dp"
+                android:fontFamily="@font/roboto_regular"
                 android:text="@string/forgot_your_password"
                 android:textAllCaps="false" />
 
@@ -93,15 +100,16 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/register_button_bg"
                 android:text="@string/login_CTA"
+                android:fontFamily="@font/roboto_bold"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:padding="16dp"
+                android:fontFamily="@font/roboto_regular"
                 android:text="@string/register_for_free_at_lindera"
                 android:textAllCaps="false" />
 
@@ -110,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@drawable/login_button_bg"
+                android:fontFamily="@font/roboto_medium"
                 android:text="@string/registration_CTA"
                 android:textAllCaps="false" />
 
@@ -130,6 +139,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@color/white"
                 android:padding="16dp"
+                android:fontFamily="@font/roboto_regular"
                 android:text="@string/contact_lindera_CTA"
                 android:textAllCaps="false" />
 
@@ -139,6 +149,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@color/white"
                 android:padding="16dp"
+                android:fontFamily="@font/roboto_regular"
                 android:text="@string/landing_help_faq"
                 android:textAllCaps="false" />
 
