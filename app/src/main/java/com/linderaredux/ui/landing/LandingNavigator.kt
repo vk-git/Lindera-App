@@ -7,4 +7,5 @@ interface LandingNavigator : BaseNavigator {
 
     fun handleError(error: String)
     fun onLoginScreen()
+    fun onRegisterScreen()
 }

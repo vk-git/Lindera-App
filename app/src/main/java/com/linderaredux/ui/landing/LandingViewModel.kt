@@ -10,4 +10,8 @@ class LandingViewModel(linderaService: LinderaService, session: Session) : BaseV
     fun onLoginButtonClick(){
         getNavigator()!!.onLoginScreen()
     }
+
+    fun onRegisterButtonClick(){
+        getNavigator()!!.onRegisterScreen()
+    }
 }

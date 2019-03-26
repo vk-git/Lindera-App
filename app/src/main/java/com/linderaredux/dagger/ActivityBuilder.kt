@@ -4,6 +4,8 @@ import com.linderaredux.ui.landing.LandingActivity
 import com.linderaredux.ui.landing.LandingActivityModule
 import com.linderaredux.ui.login.LoginActivity
 import com.linderaredux.ui.login.LoginActivityModule
+import com.linderaredux.ui.register.RegisterActivity
+import com.linderaredux.ui.register.RegisterActivityModule
 import com.linderaredux.ui.splash.SplashActivity
 import com.linderaredux.ui.splash.SplashActivityModule
 import dagger.Module
@@ -20,4 +22,7 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = [LoginActivityModule::class])
     internal abstract fun bindLoginActivity(): LoginActivity
+
+    @ContributesAndroidInjector(modules = [RegisterActivityModule::class])
+    internal abstract fun bindRegisterActivity(): RegisterActivity
 }
