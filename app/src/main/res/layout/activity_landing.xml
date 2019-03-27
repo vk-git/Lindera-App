@@ -54,6 +54,7 @@
                 android:text="@string/landing_register"
                 android:fontFamily="@font/roboto_medium"
                 android:textAllCaps="false"
+                android:onClick="@{()->viewModel.onRegisterButtonClick()}"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 

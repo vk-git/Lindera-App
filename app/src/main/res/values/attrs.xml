@@ -13,4 +13,13 @@
         <attr format="integer" name="avp_duration"/>
     </declare-styleable>
 
+    <declare-styleable name="CheckBox">
+        <attr name="paddingRight" format="dimension"/>
+        <attr name="paddingLeft" format="dimension"/>
+        <attr name="android:button"/>
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+    </declare-styleable>
+
 </resources>

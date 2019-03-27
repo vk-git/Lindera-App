@@ -1,33 +1,31 @@
-package com.linderaredux.ui.landing
+package com.linderaredux.ui.register
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.linderaredux.BR
-import com.linderaredux.R
-import com.linderaredux.adapter.CustomPagerAdapter
 import com.linderaredux.base.BaseActivity
-import com.linderaredux.databinding.ActivityLandingBinding
+import com.linderaredux.databinding.ActivityRegisterBinding
 import com.linderaredux.ui.login.LoginActivity
-import com.linderaredux.ui.register.RegisterActivity
 import javax.inject.Inject
+import android.widget.ArrayAdapter
+import com.linderaredux.R
 
-class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>(), LandingNavigator {
+class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel>(), RegisterNavigator {
+
 
     companion object {
         fun newIntent(context: Context): Intent {
-            return Intent(context, LandingActivity::class.java)
+            return Intent(context, RegisterActivity::class.java)
         }
     }
 
     @set:Inject
-    override var viewModel: LandingViewModel? = null
+    override var viewModel: RegisterViewModel? = null
 
-    @set:Inject
-    var mCustomPagerAdapter: CustomPagerAdapter? = null
-
-    private var mActivityLandingBinding: ActivityLandingBinding? = null
+    private var mActivityRegisterBinding: ActivityRegisterBinding? = null
 
     override val bindingVariable: Int
         get() = BR.viewModel
@@ -36,25 +34,26 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
         get() = false
 
     override val layoutId: Int
-        get() = R.layout.activity_landing
+        get() = R.layout.activity_register
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mActivityLandingBinding = getViewDataBinding()
+        mActivityRegisterBinding = getViewDataBinding()
         viewModel?.setNavigator(this)
 
-        mActivityLandingBinding!!.viewPager.apply {
-            adapter = mCustomPagerAdapter
-        }
+        mActivityRegisterBinding!!.toolbar.setBackButton(true)
+        mActivityRegisterBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
+            finish()
+        })
+
+        val list = resources.getStringArray(R.array.position)
+        val adapter = ArrayAdapter(this,
+                android.R.layout.simple_dropdown_item_1line, list)
+        mActivityRegisterBinding!!.txtPosition.setAdapter(adapter)
     }
 
     override fun onLoginScreen() {
         val intent = LoginActivity.newIntent(this)
-        startActivity(intent)
-    }
-
-    override fun onRegisterScreen() {
-        val intent = RegisterActivity.newIntent(this)
         startActivity(intent)
     }
 

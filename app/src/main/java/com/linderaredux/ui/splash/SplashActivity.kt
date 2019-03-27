@@ -45,6 +45,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
     override fun onLandingScreen() {
         val intent = LandingActivity.newIntent(this)
         startActivity(intent)
+        finish()
     }
 
     override fun handleError(error: String) {
