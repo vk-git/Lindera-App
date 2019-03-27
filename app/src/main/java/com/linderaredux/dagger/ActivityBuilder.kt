@@ -1,5 +1,7 @@
 package com.linderaredux.dagger
 
+import com.linderaredux.ui.confirm_account.ConfirmAccountActivity
+import com.linderaredux.ui.confirm_account.ConfirmAccountActivityModule
 import com.linderaredux.ui.landing.LandingActivity
 import com.linderaredux.ui.landing.LandingActivityModule
 import com.linderaredux.ui.login.LoginActivity
@@ -25,4 +27,7 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = [RegisterActivityModule::class])
     internal abstract fun bindRegisterActivity(): RegisterActivity
+
+    @ContributesAndroidInjector(modules = [ConfirmAccountActivityModule::class])
+    internal abstract fun bindConfirmAccountActivity(): ConfirmAccountActivity
 }
