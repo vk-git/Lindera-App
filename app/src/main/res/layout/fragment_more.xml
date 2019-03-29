@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.more.MoreFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.linderaredux.ui.main.more.MoreViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/profileLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp"
+                    android:background="@drawable/drawable_text_view"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="19dp"
+                        android:src="@drawable/ic_launcher" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/setting_text_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/settings_name"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/settings_post"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/setting_text_name"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/settings_post"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="20dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="33dp"
+                            android:layout_marginEnd="11dp"
+                            android:src="@drawable/arrow_right_small" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/settings_post"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/settings_institute"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtFacility"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_facility"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtRecordAnalysis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/settings_record"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtChangePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/settings_change_password"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtDeleteAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_delete_account"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/settings_feedback"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtContactLindera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_contact"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtHelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_help"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtTerms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_terms"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtPolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_privacy"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtMasthead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_contact_us"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.linderaredux.view.LinderaTextView
+                    android:id="@+id/txtLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="50dp"
+                    android:text="@string/settings_log_out"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

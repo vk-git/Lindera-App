@@ -6,6 +6,12 @@ import com.linderaredux.ui.landing.LandingActivity
 import com.linderaredux.ui.landing.LandingActivityModule
 import com.linderaredux.ui.login.LoginActivity
 import com.linderaredux.ui.login.LoginActivityModule
+import com.linderaredux.ui.main.MainActivity
+import com.linderaredux.ui.main.MainActivityModule
+import com.linderaredux.ui.main.analyse.AnalyseFragmentProvider
+import com.linderaredux.ui.main.home.HomeFragmentProvider
+import com.linderaredux.ui.main.more.MoreFragmentProvider
+import com.linderaredux.ui.main.patient.PatientFragmentProvider
 import com.linderaredux.ui.register.RegisterActivity
 import com.linderaredux.ui.register.RegisterActivityModule
 import com.linderaredux.ui.splash.SplashActivity
@@ -30,4 +36,12 @@ abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = [ConfirmAccountActivityModule::class])
     internal abstract fun bindConfirmAccountActivity(): ConfirmAccountActivity
+
+    @ContributesAndroidInjector(
+            modules = [MainActivityModule::class,
+                HomeFragmentProvider::class,
+                MoreFragmentProvider::class,
+                PatientFragmentProvider::class,
+                AnalyseFragmentProvider::class])
+    internal abstract fun bindMainActivity(): MainActivity
 }

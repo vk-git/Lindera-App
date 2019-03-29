@@ -61,4 +61,7 @@ dependencies {
 
     //https://github.com/Lesilva/BetterSpinner
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
+
+    //https://github.com/antonKozyriatskyi/CircularProgressIndicator
+    implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.3.0'
 }

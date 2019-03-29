@@ -10,4 +10,8 @@ class LoginViewModel(linderaService: LinderaService, session: Session) : BaseVie
     fun onRegisterButtonClick(){
         getNavigator()!!.onRegisterScreen()
     }
+
+    fun onLoginButtonClick(){
+        getNavigator()?.onLoginHandle()
+    }
 }

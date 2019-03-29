@@ -7,4 +7,11 @@
         <item>Consultant Caregiver</item>
         <item>Other</item>
     </string-array>
+
+    <array name="tab_name">
+        <item>Home</item>
+        <item>Patient</item>
+        <item>Analyse</item>
+        <item>More</item>
+    </array>
 </resources>

@@ -22,4 +22,16 @@
         <attr name="android:textSize"/>
     </declare-styleable>
 
+    <declare-styleable name="TextView">
+        <attr name="android:text" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="android:gravity"/>
+    </declare-styleable>
+
+    <declare-styleable name="Alphabetik">
+        <attr name="width" format="dimension" />
+        <attr name="fontSize" format="dimension" />
+        <attr name="itemsColor" format="reference" />
+    </declare-styleable>
 </resources>
