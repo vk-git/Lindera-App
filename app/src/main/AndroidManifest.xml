@@ -32,6 +32,8 @@
             android:theme="@style/AppTheme.White"/>
         <activity android:name=".ui.confirm_account.ConfirmAccountActivity"
             android:theme="@style/AppTheme.White"/>
+        <activity android:name=".ui.contact.ContactActivity"
+            android:theme="@style/AppTheme.White"/>
     </application>
 
 </manifest>
