@@ -57,16 +57,4 @@ class LandingActivity : BaseActivity<ActivityLandingBinding, LandingViewModel>()
         val intent = RegisterActivity.newIntent(this)
         startActivity(intent)
     }
-
-    override fun handleError(error: String) {
-        Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show();
-    }
-
-    override fun onInternetConnectionError() {
-        Toast.makeText(
-                applicationContext,
-                getString(R.string.please_check_your_internet_connection_or_try_again_later),
-                Toast.LENGTH_SHORT
-        ).show()
-    }
 }

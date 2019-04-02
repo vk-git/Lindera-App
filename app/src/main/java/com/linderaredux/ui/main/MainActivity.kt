@@ -137,14 +137,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         mNavController?.switchTab(position)
     }
 
-    override fun onInternetConnectionError() {
-        Toast.makeText(
-            applicationContext,
-            getString(R.string.please_check_your_internet_connection_or_try_again_later),
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
         return fragmentDispatchingAndroidInjector!!
     }
@@ -228,13 +220,5 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
             mActivityMainBinding!!.navToolbar.setBackButton(false)
             mActivityMainBinding!!.navToolbar.setBackButtonListener(null)
         }
-    }
-
-    override fun handleError(error: String) {
-        Toast.makeText(
-            applicationContext,
-            error,
-            Toast.LENGTH_SHORT
-        ).show()
     }
 }

@@ -59,4 +59,20 @@
     <string name="settings_privacy">Privacy Policy</string>
     <string name="settings_contact_us">Imprint</string>
     <string name="settings_log_out">Logout</string>
+
+    <!--analysis-->
+    <string name="analysis_process_date">Date:</string>
+    <string name="analysis_process_date1"><font color='#000000'><b> 22.08.2018</b></font></string>
+    <string name="analysis_process_status">Status:</string>
+    <string name="analysis_process_status1"><font color='#000000'><b> Questionnaire not complete</b></font></string>
+    <string name="analysis_process_video_status">Status:</string>
+    <string name="analysis_process_video_status1"><font color='#000000'><b> Video not recorded</b></font></string>
+    <string name="analysis_process_complete">To complete</string>
+    <string name="analysis_upload_all">Upload all</string>
+    <string name="analysis_upload_status1"><font color='#000000'><b> Completed</b></font></string>
+    <string name="analysis_upload_will_be_uploaded">Will be uploaded</string>
+    <string name="analysis_upload_error">Error uploading</string>
+    <string name="analysis_upload_try_again">Try again</string>
+    <string name="analysis_upload">Upload</string>
+    <string name="analysis_archive_date">22.06.2018 13:44</string>
 </resources>

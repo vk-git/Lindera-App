@@ -51,20 +51,4 @@ class PatientFragment : BaseFragment<FragmentPatientBinding, PatientViewModel>()
 
         (activity as MainActivity).updateToolbarTitle("Patients")
     }
-
-    override fun onInternetConnectionError() {
-        Toast.makeText(
-                activity,
-                getString(R.string.please_check_your_internet_connection_or_try_again_later),
-                Toast.LENGTH_SHORT
-        ).show()
-    }
-
-    override fun handleError(error: String) {
-        Toast.makeText(
-                activity,
-                error,
-                Toast.LENGTH_SHORT
-        ).show()
-    }
 }
