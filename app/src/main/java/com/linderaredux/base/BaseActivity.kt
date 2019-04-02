@@ -4,13 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.linderaredux.R
 import dagger.android.AndroidInjection
 
-abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppCompatActivity(), BaseNavigator {
 
     private var viewDataBinding: T? = null
     private var mViewModel: V? = null
@@ -68,5 +70,17 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
         this.mViewModel = if (mViewModel == null) viewModel else mViewModel
         viewDataBinding!!.setVariable(bindingVariable, mViewModel)
         viewDataBinding!!.executePendingBindings()
+    }
+
+    override fun handleError(error: String) {
+        Toast.makeText(applicationContext, error, Toast.LENGTH_SHORT).show();
+    }
+
+    override fun onInternetConnectionError() {
+        Toast.makeText(
+                applicationContext,
+                getString(R.string.please_check_your_internet_connection_or_try_again_later),
+                Toast.LENGTH_SHORT
+        ).show()
     }
 }

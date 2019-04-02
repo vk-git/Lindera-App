@@ -4,6 +4,4 @@ import com.linderaredux.base.BaseNavigator
 
 
 interface ConfirmAccountNavigator : BaseNavigator {
-
-    fun handleError(error: String)
 }

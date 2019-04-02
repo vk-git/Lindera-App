@@ -4,5 +4,4 @@ import com.linderaredux.base.BaseNavigator
 
 
 interface MainNavigator : BaseNavigator {
-    fun handleError(error: String)
 }
