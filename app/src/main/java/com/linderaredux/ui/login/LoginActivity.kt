@@ -4,11 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
-import com.linderaredux.databinding.ActivityLandingBinding
 import com.linderaredux.databinding.ActivityLoginBinding
 import com.linderaredux.ui.main.MainActivity
 import com.linderaredux.ui.register.RegisterActivity

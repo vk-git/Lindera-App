@@ -2,15 +2,12 @@ package com.linderaredux.ui.main.patient
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseFragment
-import com.linderaredux.databinding.FragmentHomeBinding
-import com.linderaredux.databinding.FragmentMoreBinding
 import com.linderaredux.databinding.FragmentPatientBinding
 import com.linderaredux.ui.main.MainActivity
 import javax.inject.Inject

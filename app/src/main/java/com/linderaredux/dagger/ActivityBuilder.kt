@@ -2,6 +2,8 @@ package com.linderaredux.dagger
 
 import com.linderaredux.ui.confirm_account.ConfirmAccountActivity
 import com.linderaredux.ui.confirm_account.ConfirmAccountActivityModule
+import com.linderaredux.ui.contact.ContactActivity
+import com.linderaredux.ui.contact.ContactActivityModule
 import com.linderaredux.ui.landing.LandingActivity
 import com.linderaredux.ui.landing.LandingActivityModule
 import com.linderaredux.ui.login.LoginActivity
@@ -50,4 +52,8 @@ abstract class ActivityBuilder {
                 UploadFragmentProvider::class,
                 ArchiveFragmentProvider::class])
     internal abstract fun bindMainActivity(): MainActivity
+
+    @ContributesAndroidInjector(modules = [ContactActivityModule::class])
+    internal abstract fun bindContactActivity(): ContactActivity
+
 }
