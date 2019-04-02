@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp">
+
+        <ImageView
+                android:id="@+id/tab_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/dashboard_off"
+                android:scaleType="centerInside"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/badgeCotainer"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:minWidth="16dp"
+            android:visibility="gone">
+
+        <TextView
+                android:id="@+id/badge"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/register_button_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:text="2"
+                android:gravity="center"
+                android:textSize="12sp"/>
+    </LinearLayout>
+</RelativeLayout>

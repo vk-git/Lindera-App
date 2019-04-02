@@ -3,7 +3,6 @@ package com.linderaredux.ui.landing
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.adapter.CustomPagerAdapter

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.linderaredux.BR
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityRegisterBinding

@@ -5,4 +5,5 @@ import com.linderaredux.base.BaseNavigator
 
 interface LoginNavigator : BaseNavigator {
     fun onRegisterScreen()
+    fun onLoginHandle()
 }

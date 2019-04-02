@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.Main.MainActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.linderaredux.ui.main.MainViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.linderaredux.view.ToolBar
+            android:id="@+id/navToolbar"
+            android:text="Dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/navBottomBar"
+            android:layout_below="@+id/navToolbar" />
+
+        <LinearLayout
+            android:id="@+id/navBottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:background="#E3E3E3" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/bottomTabLayout"
+                style="@style/BottomTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/white"
+                app:tabIconTint="@color/colorPrimary"
+                app:tabIconTintMode="src_atop" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

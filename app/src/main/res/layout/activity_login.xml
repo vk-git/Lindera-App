@@ -102,6 +102,7 @@
                 android:background="@drawable/register_button_bg"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/login_CTA"
+                android:onClick="@{()->viewModel.onLoginButtonClick()}"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 

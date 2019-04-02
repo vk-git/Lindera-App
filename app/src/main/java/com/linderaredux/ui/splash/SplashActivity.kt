@@ -3,11 +3,9 @@ package com.linderaredux.ui.splash
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
-import com.linderaredux.databinding.ActivityLandingBinding
 import com.linderaredux.databinding.ActivitySplashBinding
 import com.linderaredux.ui.landing.LandingActivity
 import javax.inject.Inject

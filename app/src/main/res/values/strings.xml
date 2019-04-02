@@ -18,4 +18,45 @@
     <string name="registration_CTA">Registration</string>
     <string name="contact_lindera_CTA">Contact Lindera</string>
     <string name="user_name">User name</string>
+
+    <!--dashboard-->
+    <string name="dashboard_title">CARE CENTER "AN DER ELBE" GMBH</string>
+    <string name="dashboard_last_analyzes">Last analysis</string>
+    <string name="dashboard_date">August 2018</string>
+    <string name="dashboard_name">Martina Rheinsberg</string>
+    <string name="dashboard_status">Status</string>
+    <string name="dashboard_repeat">Repeat Analysis</string>
+    <string name="dashboard_offline">(Offline)</string>
+    <string name="dashboard_text">Analysis Completed</string>
+    <string name="dashboard_text1">Analysis in progress</string>
+    <string name="dashboard_notification">4</string>
+    <string name="dashboard_notification1">12</string>
+    <string name="dashboard_progress_name">Sturzgrad</string>
+    <string name="dashboard_progress_date">Last Analysis:<font color='#000000'><b> 22.08.2018</b></font></string>
+    <string name="dashboard_progress_status">Status:<font color='#000000'><b> Completed</b></font></string>
+    <string name="dashboard_repeat_analysis">Repeat analysis</string>
+    <string name="dashboard_load_more">Load more</string>
+    <string name="dashboard_how_to_record">How do I take\nAnalysis on?</string>
+    <string name="dashboard_services">Except blinds are not cupidatat I\nexcept, they abandon their responsibilities are to blame\nsoft minds.</string>
+    <string name="dashboard_start">Start analysis</string>
+    <string name="dashboard_nursing_home">Nursing home Berlin</string>
+    <string name="dashboard_start_new_analysis">Start new analysis</string>
+    <string name="dashboard_new_analysis">Select a patient\nand start new analysis</string>
+    <string name="dashboard_search">Search</string>
+
+    <!--setting-->
+    <string name="settings_name">Mark Schneider</string>
+    <string name="settings_post">Nurse</string>
+    <string name="settings_institute">Hesena, Institution Berlin</string>
+    <string name="settings_facility">Facility</string>
+    <string name="settings_record">How do I record analysis?</string>
+    <string name="settings_change_password">Change Password</string>
+    <string name="settings_delete_account">Deleting an account</string>
+    <string name="settings_feedback">Feedback</string>
+    <string name="settings_contact">Contact Lindera</string>
+    <string name="settings_help">Help/FAQ</string>
+    <string name="settings_terms">Terms of Use</string>
+    <string name="settings_privacy">Privacy Policy</string>
+    <string name="settings_contact_us">Imprint</string>
+    <string name="settings_log_out">Logout</string>
 </resources>
