@@ -5,15 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.linderaredux.R
 import dagger.android.support.AndroidSupportInjection
 
 
-abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragment(), BaseNavigator {
 
     lateinit var mFragmentNavigation: FragmentNavigation
     var baseActivity: BaseActivity<*, *>? = null
@@ -88,5 +90,17 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
 
     interface FragmentNavigation {
         fun pushFragment(fragment: Fragment)
+    }
+
+    override fun handleError(error: String) {
+        Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
+    }
+
+    override fun onInternetConnectionError() {
+        Toast.makeText(
+                activity,
+                getString(R.string.please_check_your_internet_connection_or_try_again_later),
+                Toast.LENGTH_SHORT
+        ).show()
     }
 }
