@@ -13,6 +13,9 @@ import com.linderaredux.ui.login.LoginActivityModule
 import com.linderaredux.ui.main.MainActivity
 import com.linderaredux.ui.main.MainActivityModule
 import com.linderaredux.ui.main.analyse.AnalyseFragmentProvider
+import com.linderaredux.ui.main.analyse.archive.ArchiveFragmentProvider
+import com.linderaredux.ui.main.analyse.processing.ProcessingFragmentProvider
+import com.linderaredux.ui.main.analyse.upload.UploadFragmentProvider
 import com.linderaredux.ui.main.home.HomeFragmentProvider
 import com.linderaredux.ui.main.more.MoreFragmentProvider
 import com.linderaredux.ui.main.patient.PatientFragmentProvider
@@ -48,7 +51,10 @@ abstract class ActivityBuilder {
                 HomeFragmentProvider::class,
                 MoreFragmentProvider::class,
                 PatientFragmentProvider::class,
-                AnalyseFragmentProvider::class])
+                AnalyseFragmentProvider::class,
+                ProcessingFragmentProvider::class,
+                UploadFragmentProvider::class,
+                ArchiveFragmentProvider::class])
     internal abstract fun bindMainActivity(): MainActivity
 
     @ContributesAndroidInjector(modules = [ContactActivityModule::class])

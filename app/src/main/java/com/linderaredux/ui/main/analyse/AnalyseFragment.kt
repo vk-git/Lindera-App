@@ -5,8 +5,10 @@ import android.view.View
 import androidx.annotation.Nullable
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.tabs.TabLayout
 import com.linderaredux.BR
 import com.linderaredux.R
+import com.linderaredux.adapter.AnalysisAdapter
 import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.FragmentAnalyseBinding
 import com.linderaredux.ui.main.MainActivity
@@ -25,6 +27,9 @@ class AnalyseFragment : BaseFragment<FragmentAnalyseBinding, AnalyseViewModel>()
 
     @set:Inject
     var mViewModelFactory: ViewModelProvider.Factory? = null
+
+    @set:Inject
+    var mAnalysisAdapter: AnalysisAdapter? = null
 
     private var mFragmentAnalyseBinding: FragmentAnalyseBinding? = null
 
@@ -47,5 +52,30 @@ class AnalyseFragment : BaseFragment<FragmentAnalyseBinding, AnalyseViewModel>()
         mFragmentAnalyseBinding = viewDataBinding
 
         (activity as MainActivity).updateToolbarTitle("Analyse")
+
+        initTabs()
+    }
+
+    private fun initTabs() {
+        mFragmentAnalyseBinding!!.tabLayout.addTab(mFragmentAnalyseBinding!!.tabLayout.newTab().setText("In Progress"))
+        mFragmentAnalyseBinding!!.tabLayout.addTab(mFragmentAnalyseBinding!!.tabLayout.newTab().setText("Upload"))
+        mFragmentAnalyseBinding!!.tabLayout.addTab(mFragmentAnalyseBinding!!.tabLayout.newTab().setText("Archive"))
+        mFragmentAnalyseBinding!!.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+
+        mFragmentAnalyseBinding!!.viewPager.adapter = mAnalysisAdapter
+        mFragmentAnalyseBinding!!.viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mFragmentAnalyseBinding!!.tabLayout))
+        mFragmentAnalyseBinding!!.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+                mFragmentAnalyseBinding!!.viewPager.setCurrentItem(p0!!.position, true);
+            }
+        })
     }
 }
