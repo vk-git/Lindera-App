@@ -59,4 +59,24 @@
     <string name="settings_privacy">Privacy Policy</string>
     <string name="settings_contact_us">Imprint</string>
     <string name="settings_log_out">Logout</string>
+
+    <!--Profile-->
+    <string name="profile_change_picture">Change Profile Picture</string>
+    <string name="profile_title">Title</string>
+    <string name="profile_first_name">Firstname</string>
+    <string name="profile_surname">Surname</string>
+    <string name="profile_username">Username</string>
+    <string name="profile_email">E-Mail</string>
+
+    <!--Facility-->
+    <string name="facility_to_change">Change</string>
+    <string name="facility_company">Company Name (Commercial Register)</string>
+    <string name="facility_street">Street</string>
+    <string name="facility_house_number">House Number</string>
+    <string name="facility_postcode">Postcode</string>
+    <string name="facility_city">City</string>
+    <string name="facility_email">Contact E-Mail</string>
+    <string name="facility_phone">Phone</string>
+    <string name="facility_address">Billing Address</string>
+    <string name="facility_save">Save</string>
 </resources>

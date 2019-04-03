@@ -9,7 +9,9 @@ import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.FragmentMoreBinding
+import com.linderaredux.ui.facility.FacilityActivity
 import com.linderaredux.ui.main.MainActivity
+import com.linderaredux.ui.profile.ProfileActivity
 import javax.inject.Inject
 
 class MoreFragment : BaseFragment<FragmentMoreBinding, MoreViewModel>(), MoreNavigator {
@@ -47,5 +49,15 @@ class MoreFragment : BaseFragment<FragmentMoreBinding, MoreViewModel>(), MoreNav
         mFragmentMoreBinding = viewDataBinding
 
         (activity as MainActivity).updateToolbarTitle("More")
+    }
+
+    override fun onProfileScreen() {
+        val intent = activity?.let { ProfileActivity.newIntent(it) }
+        startActivity(intent)
+    }
+
+    override fun onFacilityScreen() {
+        val intent = activity?.let { FacilityActivity.newIntent(it) }
+        startActivity(intent)
     }
 }
