@@ -37,6 +37,10 @@
             android:theme="@style/AppTheme.White"/>
         <activity android:name=".ui.contact.ContactActivity"
             android:theme="@style/AppTheme.White"/>
+        <activity android:name=".ui.profile.ProfileActivity"
+            android:theme="@style/AppTheme.White"/>
+        <activity android:name=".ui.facility.FacilityActivity"
+            android:theme="@style/AppTheme.White"/>
     </application>
 
 </manifest>

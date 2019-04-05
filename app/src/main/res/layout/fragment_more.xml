@@ -33,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="17dp"
                     android:background="@drawable/drawable_text_view"
+                    android:onClick="@{()-> viewModel.onProfileClick()}"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -96,6 +97,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/settings_facility"
                     android:textColor="@color/black"
+                    android:onClick="@{()-> viewModel.onFacilityClick()}"
                     android:textSize="16sp" />
 
                 <com.linderaredux.view.LinderaTextView
