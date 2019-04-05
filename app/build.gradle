@@ -12,7 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", "SERVICE_ENDPOINT", '"https://google.com/"')
+        buildConfigField("String", "SERVICE_ENDPOINT", '"https://testsys.lindera.de/"')
     }
     dataBinding {
         enabled = true

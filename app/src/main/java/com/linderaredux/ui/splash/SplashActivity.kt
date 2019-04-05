@@ -8,6 +8,7 @@ import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivitySplashBinding
 import com.linderaredux.ui.landing.LandingActivity
+import com.linderaredux.ui.main.MainActivity
 import javax.inject.Inject
 
 class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), SplashNavigator {
@@ -42,6 +43,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
 
     override fun onLandingScreen() {
         val intent = LandingActivity.newIntent(this)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onMainScreen() {
+        val intent = MainActivity.newIntent(this)
         startActivity(intent)
         finish()
     }
