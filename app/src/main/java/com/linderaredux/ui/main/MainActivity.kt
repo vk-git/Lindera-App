@@ -27,8 +27,8 @@ import javax.inject.Inject
 
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNavigator, HasSupportFragmentInjector,
-    BaseFragment.FragmentNavigation,
-    FragNavController.TransactionListener, FragNavController.RootFragmentListener {
+        BaseFragment.FragmentNavigation,
+        FragNavController.TransactionListener, FragNavController.RootFragmentListener {
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -51,10 +51,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     private var tabs: Array<String>? = null
 
     private val mTabIconsSelected = intArrayOf(
-        R.drawable.dashboard_off,
-        R.drawable.patient_off,
-        R.drawable.analyse_off,
-        R.drawable.more_off
+            R.drawable.dashboard_off,
+            R.drawable.patient_off,
+            R.drawable.analyse_off,
+            R.drawable.more_off
     )
 
     override val bindingVariable: Int
@@ -76,9 +76,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         fragmentHistory = FragmentHistory()
 
         mNavController = FragNavController.newBuilder(savedInstanceState, supportFragmentManager, R.id.container)
-            .transactionListener(this)
-            .rootFragmentListener(this, (tabs as Array<String>).size)
-            .build()
+                .transactionListener(this)
+                .rootFragmentListener(this, (tabs as Array<String>).size)
+                .build()
 
         initTab()
 
@@ -103,6 +103,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
 
         switchTab(0)
         setTabViewSelectedColor(bottomTabLayout.getTabAt(0)!!)
+
+        viewModel?.let {
+            it.userHome()
+            it.userPatients()
+        }
     }
 
     private fun initTab() {
@@ -143,8 +148,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     override fun onBackPressed() {
         if (!mNavController?.isRootFragment!!) {
             val customAnimation =
-                FragNavTransactionOptions.newBuilder().customAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
-                    .build()
+                    FragNavTransactionOptions.newBuilder().customAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+                            .build()
             mNavController?.popFragment(customAnimation)
         } else {
             if (fragmentHistory?.isEmpty()!!) {
@@ -180,8 +185,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
 
     override fun pushFragment(fragment: Fragment) {
         val customAnimation =
-            FragNavTransactionOptions.newBuilder().customAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-                .build()
+                FragNavTransactionOptions.newBuilder().customAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
+                        .build()
         mNavController?.pushFragment(fragment, customAnimation)
     }
 

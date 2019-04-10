@@ -3,14 +3,20 @@ package com.linderaredux.ui.login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import com.google.gson.JsonObject
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityLoginBinding
+import com.linderaredux.ui.confirm_account.ConfirmAccountActivity
 import com.linderaredux.ui.main.MainActivity
 import com.linderaredux.ui.register.RegisterActivity
+import com.linderaredux.utils.Validation
+import com.linderaredux.utils.Validation.ValidationType
 import javax.inject.Inject
+
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), LoginNavigator {
 
@@ -43,11 +49,30 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
         mActivityLoginBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
             finish()
         })
+
+        mActivityLoginBinding!!.txtUserName.addTextChangedListener(Validation(mActivityLoginBinding!!.txtUserName, ValidationType.Email))
+        mActivityLoginBinding!!.txtUserPassword.addTextChangedListener(Validation(mActivityLoginBinding!!.txtUserPassword, ValidationType.Password))
     }
 
     override fun onLoginHandle() {
-        val intent = MainActivity.newIntent(this)
-        startActivity(intent)
+        val loginReq = JsonObject()
+        loginReq.addProperty("email", mActivityLoginBinding!!.txtUserName.text.toString())
+        loginReq.addProperty("password", mActivityLoginBinding!!.txtUserPassword.text.toString())
+        viewModel?.login(loginReq)
+    }
+
+    override fun onMainScreen() {
+        viewModel?.let {
+            if (it.getSession().getAppUser().status != "registered") {
+                val intent = ConfirmAccountActivity.newIntent(this)
+                startActivity(intent)
+            } else {
+                val intent = MainActivity.newIntent(this)
+                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
     override fun onRegisterScreen() {

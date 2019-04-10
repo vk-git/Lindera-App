@@ -9,6 +9,12 @@ import com.linderaredux.utils.Session
 class SplashViewModel(linderaService: LinderaService, session: Session) : BaseViewModel<SplashNavigator>(linderaService, session) {
 
     fun onTimeHandler(){
-        Handler().postDelayed({ getNavigator()!!.onLandingScreen() },3000)
+        Handler().postDelayed({
+            if(getSession().getAppUserToken().isEmpty()) {
+                getNavigator()!!.onLandingScreen()
+            }else{
+                getNavigator()!!.onMainScreen()
+            }
+        },3000)
     }
 }
