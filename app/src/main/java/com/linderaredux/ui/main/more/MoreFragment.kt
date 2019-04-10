@@ -1,5 +1,6 @@
 package com.linderaredux.ui.main.more
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.Nullable
@@ -10,6 +11,7 @@ import com.linderaredux.R
 import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.FragmentMoreBinding
 import com.linderaredux.ui.facility.FacilityActivity
+import com.linderaredux.ui.landing.LandingActivity
 import com.linderaredux.ui.main.MainActivity
 import com.linderaredux.ui.profile.ProfileActivity
 import javax.inject.Inject
@@ -58,6 +60,13 @@ class MoreFragment : BaseFragment<FragmentMoreBinding, MoreViewModel>(), MoreNav
 
     override fun onFacilityScreen() {
         val intent = activity?.let { FacilityActivity.newIntent(it) }
+        startActivity(intent)
+    }
+
+    override fun onLogout() {
+        val intent = LandingActivity.newIntent(context!!)
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }
 }

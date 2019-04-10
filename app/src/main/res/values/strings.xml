@@ -29,11 +29,12 @@
     <string name="dashboard_offline">(Offline)</string>
     <string name="dashboard_text">Analysis Completed</string>
     <string name="dashboard_text1">Analysis in progress</string>
-    <string name="dashboard_notification">4</string>
-    <string name="dashboard_notification1">12</string>
+    <string name="dashboard_notification">0</string>
+    <string name="dashboard_notification1">0</string>
     <string name="dashboard_progress_name">Sturzgrad</string>
-    <string name="dashboard_progress_date">Last Analysis:<font color='#000000'><b> 22.08.2018</b></font></string>
-    <string name="dashboard_progress_status">Status:<font color='#000000'><b> Completed</b></font></string>
+    <string name="dashboard_progress_date"><![CDATA[Last Analysis: <font color="#000000"><b>22.08.2018</b></font>]]></string>
+    <string name="dashboard_progress_status1"><![CDATA[Status: <font color="#000000"><b>%1$s</b></font>]]></string>
+    <string name="dashboard_progress_status2"><![CDATA[<font color="#FFFFFF">Status:</font><font color="#000000"><b> %1$s</b></font>]]></string>
     <string name="dashboard_repeat_analysis">Repeat analysis</string>
     <string name="dashboard_load_more">Load more</string>
     <string name="dashboard_how_to_record">How do I take\nAnalysis on?</string>

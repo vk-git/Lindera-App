@@ -6,8 +6,11 @@ import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.linderaredux.BR
 import com.linderaredux.R
+import com.linderaredux.adapter.AnalysisBoxAdapter
+import com.linderaredux.api.response.PatientType
 import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.FragmentArchiveBinding
 import com.linderaredux.databinding.FragmentHomeBinding
@@ -29,6 +32,9 @@ class ArchiveFragment : BaseFragment<FragmentArchiveBinding, ArchiveViewModel>()
     @set:Inject
     var mViewModelFactory: ViewModelProvider.Factory? = null
 
+    @set:Inject
+    var mAnalysisBoxAdapter: AnalysisBoxAdapter? = null
+
     private var mFragmentArchiveBinding: FragmentArchiveBinding? = null
 
     override val bindingVariable: Int
@@ -48,5 +54,18 @@ class ArchiveFragment : BaseFragment<FragmentArchiveBinding, ArchiveViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mFragmentArchiveBinding = viewDataBinding
+
+        mFragmentArchiveBinding!!.archiveRV.layoutManager = LinearLayoutManager(activity)
+        mFragmentArchiveBinding!!.archiveRV.adapter = mAnalysisBoxAdapter
+
+        setDashBoardData()
+    }
+
+    private fun setDashBoardData() {
+        val patientArchiveList = viewModel.getSession().getArchiveList()
+        patientArchiveList?.let {
+            mAnalysisBoxAdapter!!.patientType = PatientType.ARCHIVE
+            mAnalysisBoxAdapter!!.setAnalysisData(it)
+        }
     }
 }

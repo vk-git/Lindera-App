@@ -30,6 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         BaseFragment.FragmentNavigation,
         FragNavController.TransactionListener, FragNavController.RootFragmentListener {
 
+
     companion object {
         fun newIntent(context: Context): Intent {
             return Intent(context, MainActivity::class.java)
@@ -107,6 +108,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         viewModel?.let {
             it.userHome()
             it.userPatients()
+        }
+    }
+
+    override fun onHomeDataUpdate() {
+        val currentFrag = mNavController!!.currentFrag
+        if(currentFrag is HomeFragment){
+            currentFrag.setDashBoardData()
         }
     }
 

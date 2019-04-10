@@ -1,6 +1,8 @@
 package com.linderaredux.ui.main.analyse.processing
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
+import com.linderaredux.adapter.AnalysisBoxAdapter
 import com.linderaredux.api.service.LinderaService
 import com.linderaredux.utils.Session
 import com.linderaredux.utils.ViewModelProviderFactory
@@ -18,5 +20,10 @@ class ProcessingFragmentModule {
     @Provides
     fun provideProcessingViewModel(processingViewModel: ProcessingViewModel): ViewModelProvider.Factory {
         return ViewModelProviderFactory(processingViewModel)
+    }
+
+    @Provides
+    fun provideAnalysisBoxAdapter(context: Context): AnalysisBoxAdapter {
+        return AnalysisBoxAdapter(context)
     }
 }

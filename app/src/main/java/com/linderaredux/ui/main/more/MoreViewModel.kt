@@ -6,10 +6,17 @@ import com.linderaredux.utils.Session
 
 
 class MoreViewModel(linderaService: LinderaService, session: Session) : BaseViewModel<MoreNavigator>(linderaService, session) {
-    fun onProfileClick(){
+
+    fun onProfileClick() {
         getNavigator()?.onProfileScreen()
     }
-    fun onFacilityClick(){
+
+    fun onFacilityClick() {
         getNavigator()?.onFacilityScreen()
+    }
+
+    fun onLogoutClick() {
+        getSession()?.logout()
+        getNavigator()?.onLogout()
     }
 }

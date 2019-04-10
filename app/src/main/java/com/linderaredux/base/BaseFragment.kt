@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -93,14 +94,24 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
     }
 
     override fun handleError(error: String) {
-        Toast.makeText(activity, error, Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder(activity!!)
+                .setTitle("Error")
+                .setIcon(R.drawable.error)
+                .setMessage(error)
+                .setPositiveButton(android.R.string.yes) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
     }
 
     override fun onInternetConnectionError() {
-        Toast.makeText(
-                activity,
-                getString(R.string.please_check_your_internet_connection_or_try_again_later),
-                Toast.LENGTH_SHORT
-        ).show()
+        AlertDialog.Builder(activity!!)
+                .setTitle("Error")
+                .setIcon(R.drawable.error)
+                .setMessage(getString(R.string.please_check_your_internet_connection_or_try_again_later))
+                .setPositiveButton(android.R.string.yes) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
     }
 }

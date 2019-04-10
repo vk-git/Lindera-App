@@ -73,12 +73,12 @@ class MainViewModel(linderaService: LinderaService, session: Session) : BaseView
         Sort.onPatientList(list)
         if (list.isNotEmpty()) {
             list.forEach { patient ->
-                if (patient.analyse.size == 0) {
+                if (patient.analyse!!.isEmpty()) {
                     nonList.add(patient)
-                } else if (patient.analyse[patient.analyse.size - 1].submittedByUser == false) {
+                } else if (!patient.analyse[patient.analyse.size - 1].submittedByUser) {
                     progressList.add(patient)
                     if (patient.analyse.size > 1) {
-                        if (patient.analyse[patient.analyse.size - 2].submittedByUser == true) {
+                        if (patient.analyse[patient.analyse.size - 2].submittedByUser) {
                             archiveList.add(patient)
                         }
                     }
@@ -87,5 +87,11 @@ class MainViewModel(linderaService: LinderaService, session: Session) : BaseView
                 }
             }
         }
+        val patientSectionList = Sort.onPatientListWithAlphabeticalSection(list)
+        getSession().setPatientList(patientSectionList)
+        getSession().setArchiveList(archiveList)
+        getSession().setProgressList(archiveList)
+
+        getNavigator()?.onHomeDataUpdate()
     }
 }

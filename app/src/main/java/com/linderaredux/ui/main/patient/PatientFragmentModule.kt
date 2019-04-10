@@ -1,6 +1,7 @@
 package com.linderaredux.ui.main.patient
 
 import androidx.lifecycle.ViewModelProvider
+import com.linderaredux.adapter.patient.PatientAdapter
 import com.linderaredux.api.service.LinderaService
 import com.linderaredux.utils.Session
 import com.linderaredux.utils.ViewModelProviderFactory
@@ -18,5 +19,10 @@ class PatientFragmentModule {
     @Provides
     fun providePatientViewModel(patientViewModel: PatientViewModel): ViewModelProvider.Factory {
         return ViewModelProviderFactory(patientViewModel)
+    }
+
+    @Provides
+    fun providePatientAdapter(): PatientAdapter{
+        return PatientAdapter()
     }
 }
