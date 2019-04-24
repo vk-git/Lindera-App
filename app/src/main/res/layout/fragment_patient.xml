@@ -15,12 +15,12 @@
     </data>
 
     <LinearLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <!--<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -38,7 +38,37 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="22sp" />
-        </RelativeLayout>
+        </RelativeLayout>-->
+
+        <LinearLayout
+            android:id="@+id/createNewPatientLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingTop="16sp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="17dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Create new patient"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="17dp"
+                android:src="@drawable/add"
+                android:tint="@color/colorPrimary" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

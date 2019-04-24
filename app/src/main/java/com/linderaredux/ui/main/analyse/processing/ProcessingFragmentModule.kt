@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.linderaredux.adapter.AnalysisBoxAdapter
 import com.linderaredux.api.service.LinderaService
+import com.linderaredux.db.DataManager
 import com.linderaredux.utils.Session
 import com.linderaredux.utils.ViewModelProviderFactory
 import dagger.Module
@@ -13,8 +14,8 @@ import dagger.Provides
 class ProcessingFragmentModule {
 
     @Provides
-    fun homeViewModel(linderaService: LinderaService,session: Session): ProcessingViewModel {
-        return ProcessingViewModel(linderaService,session)
+    fun homeViewModel(linderaService: LinderaService,session: Session,dataManager: DataManager): ProcessingViewModel {
+        return ProcessingViewModel(linderaService,session,dataManager)
     }
 
     @Provides

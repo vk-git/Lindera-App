@@ -73,4 +73,24 @@ class LinderaService(private val linderaApi: LinderaApi) {
                     }
                 })
     }
+
+    fun userCreatePatient(patientReq: JsonObject, listener: ResponseListener<Response<BaseResponse<Patient>>, String>): Disposable {
+        return linderaApi.userCreatePatient(patientReq)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<Patient>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<Patient>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
 }

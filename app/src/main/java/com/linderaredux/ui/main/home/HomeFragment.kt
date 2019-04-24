@@ -2,6 +2,7 @@ package com.linderaredux.ui.main.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -12,7 +13,9 @@ import com.linderaredux.adapter.AnalysisBoxAdapter
 import com.linderaredux.api.response.PatientType
 import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.FragmentHomeBinding
+import com.linderaredux.ui.choose_patient.ChoosePatientActivity
 import com.linderaredux.ui.main.MainActivity
+import com.linderaredux.ui.terms_of_use.TermsOfUseActivity
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNavigator {
@@ -53,23 +56,45 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
         mFragmentHomeBinding = viewDataBinding
 
         (activity as MainActivity).updateToolbarTitle("Dashboard")
+        (activity as MainActivity).showToolbarRightText(true)
+        (activity as MainActivity).updateToolbarRightButtonText("Start Tour")
+        (activity as MainActivity).loadHomeData()
+        (activity as MainActivity).loadPatientsData()
+        (activity as MainActivity).setRightButtonListener(listener = View.OnClickListener {
+            Toast.makeText(activity, "StartTour", Toast.LENGTH_SHORT).show()
+        })
 
         mFragmentHomeBinding!!.dashboardRV.layoutManager = LinearLayoutManager(activity)
         mFragmentHomeBinding!!.dashboardRV.adapter = mAnalysisBoxAdapter
+
+        mFragmentHomeBinding!!.btnStartAnalysis.setOnClickListener {
+            val intent = activity?.let { ChoosePatientActivity.newIntent(it) }
+            startActivity(intent)
+        }
+
+        mFragmentHomeBinding!!.btnAnalysisCompleted.setOnClickListener {
+            (activity as MainActivity).onGoToAnalysisScreen(PatientType.UPLOAD)
+        }
+
+        mFragmentHomeBinding!!.btnAnalysisProgress.setOnClickListener {
+            (activity as MainActivity).onGoToAnalysisScreen(PatientType.PROGRESS)
+        }
 
         setDashBoardData()
     }
 
     fun setDashBoardData() {
         val userHomeData = viewModel.getSession().getAppUserHome()
-        if (userHomeData != null)
-            mFragmentHomeBinding!!.txtCompanyName.text = userHomeData.name
+        userHomeData?.let {
+            mFragmentHomeBinding!!.txtCompanyName.text = it.name
+        }
 
         val patientArchiveList = viewModel.getSession().getArchiveList()
         val patientProgressList = viewModel.getSession().getProgressList()
 
-        if (patientProgressList != null)
-            mFragmentHomeBinding!!.txtAnalysisProgress.text = "${patientProgressList.size}"
+        patientProgressList?.let {
+            mFragmentHomeBinding!!.txtAnalysisProgress.text = "${it.size}"
+        }
 
         patientArchiveList?.let {
             mFragmentHomeBinding!!.txtAnalysisComplete.text = "${it.size}"

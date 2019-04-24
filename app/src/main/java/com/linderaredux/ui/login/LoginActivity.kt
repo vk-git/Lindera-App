@@ -55,10 +55,36 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
     }
 
     override fun onLoginHandle() {
-        val loginReq = JsonObject()
-        loginReq.addProperty("email", mActivityLoginBinding!!.txtUserName.text.toString())
-        loginReq.addProperty("password", mActivityLoginBinding!!.txtUserPassword.text.toString())
-        viewModel?.login(loginReq)
+        if(isValid()) {
+            val loginReq = JsonObject()
+            loginReq.addProperty("email", mActivityLoginBinding!!.txtUserName.text.toString())
+            loginReq.addProperty("password", mActivityLoginBinding!!.txtUserPassword.text.toString())
+            viewModel?.login(loginReq)
+        }
+    }
+
+    private fun isValid(): Boolean {
+        var validInput = true
+        val email = mActivityLoginBinding!!.txtUserName.text.toString()
+        val password = mActivityLoginBinding!!.txtUserPassword.text.toString()
+
+        if (!Validation.isValidEmail(email)) {
+            validInput = false
+            mActivityLoginBinding!!.tIEmail.isErrorEnabled = true
+            mActivityLoginBinding!!.tIEmail.error = "The entered Email is not correct."
+        } else {
+            mActivityLoginBinding!!.tIEmail.isErrorEnabled = false
+        }
+
+        if (!Validation.isValidPassword(password)) {
+            validInput = false
+            mActivityLoginBinding!!.tIPassword.isErrorEnabled = true
+            mActivityLoginBinding!!.tIPassword.error = "Password must be at least 8 characters"
+        } else {
+            mActivityLoginBinding!!.tIPassword.isErrorEnabled = false
+        }
+
+        return validInput
     }
 
     override fun onMainScreen() {

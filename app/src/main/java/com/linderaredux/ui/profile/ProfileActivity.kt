@@ -41,5 +41,16 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
         mActivityProfileBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
             finish()
         })
+
+        setProfileData()
+    }
+
+    private fun setProfileData() {
+        viewModel!!.getSession().getAppUser()?.let {
+            mActivityProfileBinding!!.etFirstName.setText(it.firstname)
+            mActivityProfileBinding!!.etSurname.setText(it.lastname)
+            mActivityProfileBinding!!.etUsername.setText(it.username)
+            mActivityProfileBinding!!.etEmail.setText(it.email)
+        }
     }
 }

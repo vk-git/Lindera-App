@@ -2,10 +2,47 @@ package com.linderaredux.ui.main.more
 
 import com.linderaredux.api.service.LinderaService
 import com.linderaredux.base.BaseViewModel
+import com.linderaredux.db.DataManager
 import com.linderaredux.utils.Session
 
 
-class MoreViewModel(linderaService: LinderaService, session: Session) : BaseViewModel<MoreNavigator>(linderaService, session) {
+class MoreViewModel(linderaService: LinderaService, session: Session,dataManager: DataManager) : BaseViewModel<MoreNavigator>(linderaService, session, dataManager) {
+
+    fun onHowRecordAnalysisClick() {
+        getNavigator()?.onHowRecordAnalysisScreen()
+    }
+
+    fun onChangePasswordClick() {
+        getNavigator()?.onChangePasswordScreen()
+    }
+
+    fun onDeleteAccountClick(){
+        getNavigator()?.onDeleteAccountScreen()
+    }
+
+    fun onFeedBackClick() {
+        getNavigator()?.onFeedBackScreen()
+    }
+
+    fun onContactLinderaClick() {
+        getNavigator()?.onContactScreen()
+    }
+
+    fun onFAQClick() {
+        getNavigator()?.onFAQScreen()
+    }
+
+    fun onTeamsOfUseClick() {
+        getNavigator()?.onTeamsOfUseScreen()
+    }
+
+    fun onPrivacyPolicyClick() {
+        getNavigator()?.onPrivacyPolicyScreen()
+    }
+
+    fun onImprintClick() {
+        getNavigator()?.onImprintScreen()
+    }
 
     fun onProfileClick() {
         getNavigator()?.onProfileScreen()

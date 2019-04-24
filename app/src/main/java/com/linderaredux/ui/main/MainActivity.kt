@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.linderaredux.BR
 import com.linderaredux.R
+import com.linderaredux.api.response.PatientType
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.ActivityMainBinding
@@ -105,16 +106,35 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         switchTab(0)
         setTabViewSelectedColor(bottomTabLayout.getTabAt(0)!!)
 
+    }
+
+    fun loadHomeData() {
         viewModel?.let {
             it.userHome()
+        }
+    }
+
+    fun loadPatientsData() {
+        viewModel?.let {
             it.userPatients()
         }
     }
 
     override fun onHomeDataUpdate() {
         val currentFrag = mNavController!!.currentFrag
-        if(currentFrag is HomeFragment){
+        if (currentFrag is HomeFragment) {
             currentFrag.setDashBoardData()
+        } else if (currentFrag is PatientFragment) {
+            currentFrag.setPatientData()
+        }
+    }
+
+    override fun onPatientDataUpdate() {
+        val currentFrag = mNavController!!.currentFrag
+        if (currentFrag is HomeFragment) {
+            currentFrag.setDashBoardData()
+        } else if (currentFrag is PatientFragment) {
+            currentFrag.setPatientData()
         }
     }
 
@@ -231,6 +251,29 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         } else {
             mActivityMainBinding!!.navToolbar.setBackButton(false)
             mActivityMainBinding!!.navToolbar.setBackButtonListener(null)
+        }
+    }
+
+    fun updateToolbarRightButtonText(txtRight: String) {
+        mActivityMainBinding!!.navToolbar.setRightText(txtRight)
+    }
+
+    fun showToolbarRightText(isShow: Boolean){
+        mActivityMainBinding!!.navToolbar.showRightText(isShow)
+    }
+
+    fun setRightButtonListener(listener: View.OnClickListener?) {
+        mActivityMainBinding!!.navToolbar.setRightButtonListener(listener)
+    }
+
+    fun onGoToAnalysisScreen(patientType: PatientType) {
+        fragmentHistory?.push(2)
+        switchTab(2)
+        updateTabSelection(2)
+        mNavController?.clearStack()
+        val currentFragment = mNavController?.currentFrag!!
+        if (currentFragment is AnalyseFragment) {
+            currentFragment.setSelectedTab(patientType)
         }
     }
 }

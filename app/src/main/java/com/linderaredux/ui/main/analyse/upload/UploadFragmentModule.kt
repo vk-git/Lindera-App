@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import com.linderaredux.adapter.AnalysisBoxAdapter
 import com.linderaredux.api.service.LinderaService
+import com.linderaredux.db.DataManager
 import com.linderaredux.utils.Session
 import com.linderaredux.utils.ViewModelProviderFactory
 import dagger.Module
@@ -13,8 +14,8 @@ import dagger.Provides
 class UploadFragmentModule {
 
     @Provides
-    fun uploadViewModel(linderaService: LinderaService,session: Session): UploadViewModel {
-        return UploadViewModel(linderaService,session)
+    fun uploadViewModel(linderaService: LinderaService,session: Session,dataManager: DataManager): UploadViewModel {
+        return UploadViewModel(linderaService,session,dataManager)
     }
 
     @Provides

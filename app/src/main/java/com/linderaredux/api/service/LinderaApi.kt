@@ -21,4 +21,7 @@ interface LinderaApi {
 
     @GET("patient/recent")
     fun userPatients(): Observable<Response<BaseResponse<List<Patient>>>>
+
+    @POST("patient")
+    fun userCreatePatient(@Body patientReq: JsonObject): Observable<Response<BaseResponse<Patient>>>
 }

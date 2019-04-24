@@ -23,6 +23,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    // For Java compilers:
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // For Kotlin compilers:
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -67,4 +76,11 @@ dependencies {
 
     //https://github.com/ShamylZakariya/StickyHeaders
     implementation 'org.zakariya.stickyheaders:stickyheaders:0.7.6'
+
+    //https://github.com/brianwernick/ExoMedia
+    implementation 'com.devbrackets.android:exomedia:4.3.0'
+
+    // database
+    implementation "androidx.room:room-rxjava2:$rootProject.roomDatabaseVersion"
+    annotationProcessor "androidx.room:room-compiler:$rootProject.roomDatabaseVersion"
 }

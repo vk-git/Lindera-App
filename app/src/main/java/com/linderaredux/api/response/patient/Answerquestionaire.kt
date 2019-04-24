@@ -1,16 +1,49 @@
 package com.linderaredux.api.response.patient
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class Answerquestionaire(@SerializedName("patientID")
-                                  val patientID: String,
+                              var patientID: String?,
                               @SerializedName("__v")
-                                  val V: Int,
+                              var V: Int,
                               @SerializedName("questionnaireID")
-                                  val questionnaireID: String,
+                              var questionnaireID: String?,
                               @SerializedName("_id")
-                                  val Id: String,
+                              var Id: String?,
                               @SerializedName("userID")
-                                  val userID: String,
+                              var userID: String?,
                               @SerializedName("timestamp")
-                                  val timestamp: String)
+                              var timestamp: String?) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readInt(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(patientID)
+        parcel.writeInt(V)
+        parcel.writeString(questionnaireID)
+        parcel.writeString(Id)
+        parcel.writeString(userID)
+        parcel.writeString(timestamp)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Answerquestionaire> {
+        override fun createFromParcel(parcel: Parcel): Answerquestionaire {
+            return Answerquestionaire(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Answerquestionaire?> {
+            return arrayOfNulls(size)
+        }
+    }
+}

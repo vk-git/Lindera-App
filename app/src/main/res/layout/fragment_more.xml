@@ -50,7 +50,7 @@
                         android:layout_marginStart="15dp">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/setting_text_name"
+                            android:id="@+id/txtUserName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
@@ -61,10 +61,10 @@
                             android:textStyle="bold" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/settings_post"
+                            android:id="@+id/txtUserStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/setting_text_name"
+                            android:layout_below="@id/txtUserName"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto_regular"
                             android:text="@string/settings_post"
@@ -81,9 +81,10 @@
                             android:src="@drawable/arrow_right_small" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtAppUserHome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/settings_post"
+                            android:layout_below="@id/txtUserStatus"
                             android:fontFamily="@font/roboto_regular"
                             android:text="@string/settings_institute"
                             android:textColor="@color/black"
@@ -106,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/settings_record"
+                    android:onClick="@{()-> viewModel.onHowRecordAnalysisClick()}"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -115,6 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/settings_change_password"
+                    android:onClick="@{()-> viewModel.onChangePasswordClick()}"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -123,6 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_delete_account"
+                    android:onClick="@{()-> viewModel.onDeleteAccountClick()}"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -132,6 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/settings_feedback"
+                    android:onClick="@{()-> viewModel.onFeedBackClick()}"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -140,6 +145,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_contact"
+                    android:onClick="@{()-> viewModel.onContactLinderaClick()}"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -148,6 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_help"
+                    android:onClick="@{()-> viewModel.onFAQClick()}"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -156,6 +163,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_terms"
+                    android:onClick="@{()-> viewModel.onTeamsOfUseClick()}"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -164,6 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_privacy"
+                    android:onClick="@{()-> viewModel.onPrivacyPolicyClick()}"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -172,6 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/settings_contact_us"
+                    android:onClick="@{()-> viewModel.onImprintClick()}"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

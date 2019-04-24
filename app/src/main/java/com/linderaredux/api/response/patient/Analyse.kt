@@ -1,36 +1,89 @@
 package com.linderaredux.api.response.patient
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class Analyse(@SerializedName("sequenceNumber")
-                       val sequenceNumber: Int = 0,
+                   var sequenceNumber: Int = 0,
                    @SerializedName("patientID")
-                       val patientID: String,
+                   var patientID: String?,
                    @SerializedName("dispatchDate")
-                       val dispatchDate: String,
+                   var dispatchDate: String?,
                    @SerializedName("language")
-                       val language: String,
+                   var language: String?,
                    @SerializedName("videoID")
-                       val videoID: String,
+                   var videoID: String?,
                    @SerializedName("params")
-                       val params: String,
+                   var params: String?,
                    @SerializedName("userID")
-                       val userID: String,
+                   var userID: String?,
                    @SerializedName("answerQuestionaireID")
-                       val answerQuestionaireID: String,
+                   var answerQuestionaireID: String?,
                    @SerializedName("score")
-                       val score: String,
+                   var score: String?,
                    @SerializedName("__v")
-                       val V: Int,
+                   var V: Int,
                    @SerializedName("answerQuestionnaireID")
-                       val answerQuestionnaireID: String,
+                   var answerQuestionnaireID: String?,
                    @SerializedName("submittedByUser")
-                       val submittedByUser: Boolean = false,
+                   var submittedByUser: Boolean = false,
                    @SerializedName("_id")
-                       val Id: String,
+                   var Id: String?,
                    @SerializedName("homeID")
-                       val homeID: String,
+                   var homeID: String?,
                    @SerializedName("status")
-                       val status: String,
+                   var status: String?,
                    @SerializedName("timestamp")
-                       val timestamp: String)
+                   var timestamp: String?) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readInt(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readInt(),
+            parcel.readString(),
+            parcel.readByte() != 0.toByte(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(sequenceNumber)
+        parcel.writeString(patientID)
+        parcel.writeString(dispatchDate)
+        parcel.writeString(language)
+        parcel.writeString(videoID)
+        parcel.writeString(params)
+        parcel.writeString(userID)
+        parcel.writeString(answerQuestionaireID)
+        parcel.writeString(score)
+        parcel.writeInt(V)
+        parcel.writeString(answerQuestionnaireID)
+        parcel.writeByte(if (submittedByUser) 1 else 0)
+        parcel.writeString(Id)
+        parcel.writeString(homeID)
+        parcel.writeString(status)
+        parcel.writeString(timestamp)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Analyse> {
+        override fun createFromParcel(parcel: Parcel): Analyse {
+            return Analyse(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Analyse?> {
+            return arrayOfNulls(size)
+        }
+    }
+}

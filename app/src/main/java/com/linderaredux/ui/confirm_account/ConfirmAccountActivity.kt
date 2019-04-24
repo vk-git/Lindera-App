@@ -3,6 +3,7 @@ package com.linderaredux.ui.confirm_account
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
@@ -35,5 +36,10 @@ class ConfirmAccountActivity : BaseActivity<ActivityConfirmAccountBinding, Confi
         super.onCreate(savedInstanceState)
         mActivityConfirmAccountBinding = getViewDataBinding()
         viewModel?.setNavigator(this)
+
+        mActivityConfirmAccountBinding!!.toolbar.setBackButton(true)
+        mActivityConfirmAccountBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
+            finish()
+        })
     }
 }

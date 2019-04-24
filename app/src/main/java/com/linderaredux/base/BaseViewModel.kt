@@ -6,8 +6,13 @@ import com.linderaredux.api.service.LinderaService
 import com.linderaredux.utils.Session
 import io.reactivex.disposables.CompositeDisposable
 import java.lang.ref.WeakReference
+import com.linderaredux.db.DataManager
+
+
 
 abstract class BaseViewModel<N> : ViewModel {
+
+    private val mDataManager: DataManager
 
     private lateinit var mNavigator: WeakReference<N>
 
@@ -20,10 +25,11 @@ abstract class BaseViewModel<N> : ViewModel {
     private val mIsLoading = ObservableBoolean(false)
     private val mIsEmptyView = ObservableBoolean(false)
 
-    constructor(linderaService: LinderaService, session: Session) {
+    constructor(linderaService: LinderaService, session: Session, mDataManager: DataManager) {
         this.mLinderaService = linderaService
         this.mSession = session
         this.mCompositeDisposable = CompositeDisposable()
+        this.mDataManager = mDataManager
     }
 
     override fun onCleared() {
@@ -65,5 +71,9 @@ abstract class BaseViewModel<N> : ViewModel {
 
     fun getSession(): Session {
         return mSession
+    }
+
+    fun getDataManager(): DataManager {
+        return mDataManager
     }
 }

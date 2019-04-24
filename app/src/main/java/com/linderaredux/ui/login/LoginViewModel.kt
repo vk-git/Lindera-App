@@ -7,12 +7,13 @@ import com.linderaredux.api.response.AppUser
 import com.linderaredux.api.response.BaseResponse
 import com.linderaredux.api.service.LinderaService
 import com.linderaredux.base.BaseViewModel
+import com.linderaredux.db.DataManager
 import com.linderaredux.utils.Session
 import com.linderaredux.utils.SharedPreferenceHelper
 import retrofit2.Response
 
 
-class LoginViewModel(linderaService: LinderaService, session: Session) : BaseViewModel<LoginNavigator>(linderaService, session) {
+class LoginViewModel(linderaService: LinderaService, session: Session,dataManager: DataManager) : BaseViewModel<LoginNavigator>(linderaService, session, dataManager) {
 
     fun onRegisterButtonClick() {
         getNavigator()!!.onRegisterScreen()
@@ -46,4 +47,5 @@ class LoginViewModel(linderaService: LinderaService, session: Session) : BaseVie
             }
         }))
     }
+
 }

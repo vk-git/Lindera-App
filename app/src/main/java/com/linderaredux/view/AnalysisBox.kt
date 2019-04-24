@@ -14,6 +14,7 @@ import antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
 import com.linderaredux.R
 import com.linderaredux.api.response.PatientType
 import com.linderaredux.api.response.patient.Patient
+import com.linderaredux.utils.DateUtils
 
 class AnalysisBox : LinearLayout {
 
@@ -59,18 +60,25 @@ class AnalysisBox : LinearLayout {
 
     fun setPatient(patientType: PatientType, patient: Patient) {
         val hasOfflineVideo = false
-        if (patientType === PatientType.ARCHIVE && patient.analyse.isNotEmpty()) {
+        if (patientType === PatientType.ARCHIVE && patient.analyse!!.isNotEmpty()) {
             txtLastAnalysisDate1.text = Html.fromHtml(resources.getString(R.string.dashboard_progress_date))
             slideImg.setColorFilter(ContextCompat.getColor(context, R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP)
             layout_date.visibility = View.GONE
             txtPatientName.text = "${patient.firstname} ${patient.lastname}"
-            val patientScoreInt = getPatientScore(patient)
+            //val patientScoreInt = getPatientScore(patient)
+            val patientScoreInt = -1
             if (patientScoreInt != -1) {
                 patientScore.visibility = View.VISIBLE
             } else {
                 patientScore.visibility = View.GONE
                 patientScoreMsg.text = "Coming Soon\nfall probability"
             }
+
+            if(patient.analyse!!.isNotEmpty()) {
+                val timeStamp = patient.analyse[patient.analyse.size - 1].timestamp!!.substring(0, 10)
+                txtLastAnalysisDate1.text = Html.fromHtml(resources.getString(R.string.dashboard_progress_date, timeStamp))
+            }
+
             if (patient.analyse[patient.analyse.size - 1].answerQuestionnaireID != null && patient.analyse[patient.analyse.size - 1].videoID != null && patient.analyse[patient.analyse.size - 1].submittedByUser) {
                 txtAnalysisStatus1.text = Html.fromHtml(resources.getString(R.string.dashboard_progress_status1, "Completed"))
                 imgStatus1.setImageResource(R.drawable.check_ok)
@@ -98,9 +106,27 @@ class AnalysisBox : LinearLayout {
                 btnAnalysis.text = "Continue Analyse"
             }
         } else if (patientType === PatientType.UPLOAD) {
-            txtLastAnalysisDate1.text = Html.fromHtml(resources.getString(R.string.dashboard_progress_date))
+            if(patient.analyse!![patient.analyse.size-1].answerQuestionnaireID!=null) {
+                val timeStamp = patient.analyse[patient.analyse.size - 1].timestamp!!.substring(0, 10)
+                txtLastAnalysisDate1.text = Html.fromHtml(resources.getString(R.string.dashboard_progress_date, timeStamp))
+            }
+
+            if (patient.analyse[patient.analyse.size - 1].answerQuestionnaireID != null) {
+                txtLastAnalysisDate.text = patient.analyse[patient.analyse.size - 1].timestamp
+            }
+
+            txtAnalysisStatus1.text = Html.fromHtml(resources.getString(R.string.dashboard_progress_status1, "has offline data"))
+            imgStatus1.visibility = View.GONE
+            imgStatus2.visibility = View.GONE
+
+            if (!patient.analyse[patient.analyse.size - 1].answerQuestionnaireID.isNullOrEmpty()) {
+                txtAnalysisStatus2.text = Html.fromHtml(resources.getString(R.string.dashboard_progress_status2, "Questionnaire not done yet"))
+            }
+
+            btnAnalysis.text = "Upload"
+
         } else if (patientType === PatientType.PROGRESS) {
-            txtLastAnalysisDate1.text = Html.fromHtml(resources.getString(R.string.dashboard_progress_date))
+            txtLastAnalysisDate1.text = Html.fromHtml(resources.getString(R.string.dashboard_progress_date, DateUtils.getDateTime()))
             slideImg.setColorFilter(ContextCompat.getColor(context, R.color.medium_grey), PorterDuff.Mode.SRC_ATOP)
             layout_date.visibility = View.GONE
             txtPatientName.text = "${patient.firstname} ${patient.lastname}"

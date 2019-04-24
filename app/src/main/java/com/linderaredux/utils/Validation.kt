@@ -59,35 +59,42 @@ class Validation(private val mEdittextview: EditText, private val valType: Valid
         }
     }
 
-    private fun isValidUserName(str: String): Boolean {
-        return Pattern.compile("^[a-zA-Z0-9_-]{3,32}$").matcher(str).matches()
-    }
 
-    private fun isValidName(str: String): Boolean {
-        return Pattern.compile("^[a-zA-Z0-9 àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð'-]{2,32}$").matcher(str).matches()
-    }
+    companion object {
+        fun removeBadSpaces(str: String): String {
+            return str.replace(" ", "")
+        }
 
-    private fun isValidNumber(str: String): Boolean {
-        return Pattern.compile("^[0-9]{1,3}$").matcher(str).matches()
-    }
+        fun isValidUserName(str: String): Boolean {
+            return Pattern.compile("^[a-zA-Z0-9_-]{3,32}$").matcher(str).matches()
+        }
 
-    private fun isValidateZIP(str: String): Boolean {
-        return Pattern.compile("^[0-9]{4,16}$").matcher(str).matches()
-    }
+        fun isValidName(str: String): Boolean {
+            return Pattern.compile("^[a-zA-Z0-9 àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð'-]{2,32}$").matcher(str).matches()
+        }
 
-    private fun isValidEmail(str: String): Boolean {
-        return Pattern.compile("^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$").matcher(str).matches()
-    }
+        fun isValidNumber(str: String): Boolean {
+            return Pattern.compile("^[0-9]{1,3}$").matcher(str).matches()
+        }
 
-    private fun isValidPassword(str: String): Boolean {
-        return str.length > 7
-    }
+        fun isValidateZIP(str: String): Boolean {
+            return Pattern.compile("^[0-9]{4,16}$").matcher(str).matches()
+        }
 
-    private fun isNumberInput(str: String): Boolean {
-        return Pattern.compile("^[0-9]*$").matcher(str).matches()
-    }
+        fun isValidEmail(str: String): Boolean {
+            return Pattern.compile("^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$").matcher(str).matches()
+        }
 
-    private fun isLetterInput(str: String): Boolean {
-        return Pattern.compile("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]*$").matcher(str).matches()
+        fun isValidPassword(str: String): Boolean {
+            return str.length > 7
+        }
+
+        fun isNumberInput(str: String): Boolean {
+            return Pattern.compile("^[0-9]*$").matcher(str).matches()
+        }
+
+        fun isLetterInput(str: String): Boolean {
+            return Pattern.compile("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]*$").matcher(str).matches()
+        }
     }
 }

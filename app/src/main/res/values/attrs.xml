@@ -5,6 +5,7 @@
         <attr name="android:textColor"/>
         <attr name="android:textSize"/>
         <attr name="leftDrawable" format="reference"/>
+        <attr name="rightText" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="AutoViewPager">

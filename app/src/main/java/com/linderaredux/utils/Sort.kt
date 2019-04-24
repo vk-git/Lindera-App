@@ -10,8 +10,8 @@ object Sort {
     fun onPatientList(list: List<Patient>) {
         Collections.sort(list, object : Comparator<Patient> {
             override fun compare(o1: Patient?, o2: Patient?): Int {
-                val genreA = o2!!.lastname.toUpperCase()
-                val genreB = o1!!.lastname.toUpperCase()
+                val genreA = o2!!.lastname!!.toUpperCase()
+                val genreB = o1!!.lastname!!.toUpperCase()
 
                 var comparison = 0
                 if (genreA > genreB) {
@@ -28,7 +28,7 @@ object Sort {
         val patientSections = ArrayList<PatientSection>()
         val patientByAlpha = HashMap<String, ArrayList<Patient>>()
         for (patient in list) {
-            val key = patient.firstname[0].toUpperCase().toString()
+            val key = patient.firstname!![0].toUpperCase().toString()
             if (patientByAlpha[key] == null) {
                 patientByAlpha[key] = ArrayList<Patient>()
             }

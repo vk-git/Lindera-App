@@ -4,4 +4,5 @@ import com.linderaredux.base.BaseNavigator
 
 interface MainNavigator : BaseNavigator {
     fun onHomeDataUpdate()
+    fun onPatientDataUpdate()
 }

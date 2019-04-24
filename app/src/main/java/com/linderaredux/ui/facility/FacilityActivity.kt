@@ -41,5 +41,20 @@ class FacilityActivity : BaseActivity<ActivityFacilityBinding, FacilityViewModel
         mActivityFacilityBinding!!.toolbar.setBackButtonListener(listener = View.OnClickListener {
             finish()
         })
+
+        setHomeData()
+    }
+
+    private fun setHomeData() {
+        viewModel!!.getSession().getAppUserHome()?.let {
+            mActivityFacilityBinding!!.etCompanyName.setText(it.name)
+            mActivityFacilityBinding!!.etCity.setText(it.city)
+            mActivityFacilityBinding!!.etStreet.setText(it.street)
+            mActivityFacilityBinding!!.etPostCode.setText(it.zip)
+
+            mActivityFacilityBinding!!.etStreetBlur.setText(it.street)
+            mActivityFacilityBinding!!.etPostCodeBlur.setText(it.zip)
+            mActivityFacilityBinding!!.etCityBlur.setText(it.city)
+        }
     }
 }

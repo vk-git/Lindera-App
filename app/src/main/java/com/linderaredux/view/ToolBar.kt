@@ -14,6 +14,7 @@ class ToolBar : LinearLayout {
 
     private lateinit var toolbarLeftButton: ImageView
     private lateinit var toolbarTitle: TextView
+    private lateinit var txtRight: TextView
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         init(context, attrs, android.R.attr.textViewStyle)
@@ -27,6 +28,7 @@ class ToolBar : LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.toolbar, this)
         toolbarLeftButton = findViewById(R.id.toolbarLeftButton)
         toolbarTitle = findViewById(R.id.toolbar_title)
+        txtRight = findViewById(R.id.txtRight)
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ToolBar, defStyleAttr, 0)
 
@@ -49,6 +51,14 @@ class ToolBar : LinearLayout {
                 toolbarLeftButton.visibility = View.GONE
             }
 
+            if (typedArray.hasValue(R.styleable.ToolBar_rightText)) {
+                val str = typedArray.getString(R.styleable.ToolBar_rightText)
+                txtRight.text = str
+                txtRight.visibility = View.VISIBLE
+            } else {
+                txtRight.visibility = View.GONE
+            }
+
         } finally {
             typedArray.recycle()
         }
@@ -64,5 +74,17 @@ class ToolBar : LinearLayout {
 
     fun setBackButtonListener(listener: View.OnClickListener?) {
         toolbarLeftButton.setOnClickListener(listener)
+    }
+
+    fun showRightText(isShow:Boolean){
+        this.txtRight.visibility = if(isShow) View.VISIBLE else View.GONE
+    }
+
+    fun setRightText(txtRight: CharSequence) {
+        this.txtRight.text = txtRight
+    }
+
+    fun setRightButtonListener(listener: View.OnClickListener?) {
+        txtRight.setOnClickListener(listener)
     }
 }

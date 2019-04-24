@@ -1,24 +1,65 @@
 package com.linderaredux.api.response.patient
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class Video(@SerializedName("stage")
-                     val stage: String,
+                     var stage: String?,
                  @SerializedName("deleteAt")
-                     val deleteAt: String,
+                     var deleteAt: String?,
                  @SerializedName("patientID")
-                     val patientID: String,
+                     var patientID: String?,
                  @SerializedName("__v")
-                     val V: Int,
+                     var V: Int,
                  @SerializedName("pathOBS")
-                     val pathOBS: String,
+                     var pathOBS: String?,
                  @SerializedName("_id")
-                     val Id: String,
+                     var Id: String?,
                  @SerializedName("type")
-                     val type: String,
+                     var type: String?,
                  @SerializedName("userID")
-                     val userID: String,
+                     var userID: String?,
                  @SerializedName("localFilePath")
-                     val localFilePath: String,
+                     var localFilePath: String?,
                  @SerializedName("timestamp")
-                     val timestamp: String)
+                     var timestamp: String?) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readInt(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(stage)
+        parcel.writeString(deleteAt)
+        parcel.writeString(patientID)
+        parcel.writeInt(V)
+        parcel.writeString(pathOBS)
+        parcel.writeString(Id)
+        parcel.writeString(type)
+        parcel.writeString(userID)
+        parcel.writeString(localFilePath)
+        parcel.writeString(timestamp)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Video> {
+        override fun createFromParcel(parcel: Parcel): Video {
+            return Video(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Video?> {
+            return arrayOfNulls(size)
+        }
+    }
+}

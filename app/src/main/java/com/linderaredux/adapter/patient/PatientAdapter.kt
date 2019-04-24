@@ -14,7 +14,7 @@ import java.util.*
 class PatientAdapter : SectioningAdapter() {
 
     private var patientSections: ArrayList<PatientSection>? = null
-    private var onPatientItemListener: OnPatientItemListener? = null
+    private lateinit var onPatientItemListener: OnPatientItemListener
 
     fun setPatientSections(patientSections: ArrayList<PatientSection>) {
         this.patientSections = patientSections
@@ -76,6 +76,11 @@ class PatientAdapter : SectioningAdapter() {
 
         fun bind(patient: Patient) {
             patientListItemBinding.patient = patient
+            patientListItemBinding.itemView.setOnClickListener {
+                if(onPatientItemListener!=null){
+                    onPatientItemListener.onItemClick(patient)
+                }
+            }
             patientListItemBinding.executePendingBindings()
         }
     }

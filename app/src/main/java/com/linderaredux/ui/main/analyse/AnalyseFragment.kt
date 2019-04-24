@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.adapter.AnalysisAdapter
+import com.linderaredux.api.response.PatientType
 import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.FragmentAnalyseBinding
 import com.linderaredux.ui.main.MainActivity
@@ -52,6 +53,7 @@ class AnalyseFragment : BaseFragment<FragmentAnalyseBinding, AnalyseViewModel>()
         mFragmentAnalyseBinding = viewDataBinding
 
         (activity as MainActivity).updateToolbarTitle("Analyse")
+        (activity as MainActivity).showToolbarRightText(false)
 
         initTabs()
     }
@@ -77,5 +79,13 @@ class AnalyseFragment : BaseFragment<FragmentAnalyseBinding, AnalyseViewModel>()
                 mFragmentAnalyseBinding!!.viewPager.setCurrentItem(p0!!.position, true);
             }
         })
+    }
+
+    fun setSelectedTab(patientType: PatientType) {
+        when (patientType) {
+            PatientType.PROGRESS -> mFragmentAnalyseBinding!!.viewPager.setCurrentItem(0, true)
+            PatientType.UPLOAD -> mFragmentAnalyseBinding!!.viewPager.setCurrentItem(1, true)
+            PatientType.ARCHIVE -> mFragmentAnalyseBinding!!.viewPager.setCurrentItem(1, true)
+        }
     }
 }

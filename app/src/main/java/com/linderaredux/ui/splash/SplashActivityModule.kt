@@ -1,6 +1,7 @@
 package com.linderaredux.ui.splash
 
 import com.linderaredux.api.service.LinderaService
+import com.linderaredux.db.DataManager
 import com.linderaredux.utils.Session
 import dagger.Module
 import dagger.Provides
@@ -9,7 +10,7 @@ import dagger.Provides
 class SplashActivityModule {
 
     @Provides
-    fun provideSplashViewModel(linderaService: LinderaService, session: Session): SplashViewModel {
-        return SplashViewModel(linderaService, session)
+    fun provideSplashViewModel(linderaService: LinderaService, session: Session,dataManager: DataManager): SplashViewModel {
+        return SplashViewModel(linderaService, session,dataManager)
     }
 }
