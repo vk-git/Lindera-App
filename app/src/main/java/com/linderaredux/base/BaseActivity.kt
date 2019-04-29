@@ -1,7 +1,12 @@
 package com.linderaredux.base
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -10,7 +15,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import com.linderaredux.R
+import com.linderaredux.utils.ConnectionLiveData
 import dagger.android.AndroidInjection
 
 
@@ -53,6 +60,13 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
 
         super.onCreate(savedInstanceState)
         performDataBinding()
+
+        val connectionLiveData = ConnectionLiveData(this)
+        connectionLiveData.observe(this, Observer { isConnected ->
+            isConnected?.let {
+                Log.d("mytag", "Internet Available:$it")
+            }
+        })
     }
 
     fun hideKeyboard() {
