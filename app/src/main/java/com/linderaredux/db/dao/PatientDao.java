@@ -4,10 +4,12 @@ import com.linderaredux.api.response.patient.Patient;
 
 import java.util.List;
 
+import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+@Dao
 public interface PatientDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

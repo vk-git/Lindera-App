@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.linderaredux.adapter.AnalysisAdapter
 import com.linderaredux.api.service.LinderaService
 import com.linderaredux.db.DataManager
-import com.linderaredux.ui.main.MainActivity
 import com.linderaredux.utils.Session
 import com.linderaredux.utils.ViewModelProviderFactory
 import dagger.Module

@@ -1,5 +1,6 @@
 package com.linderaredux.ui.main
 
+import android.util.Log
 import com.google.gson.reflect.TypeToken
 import com.linderaredux.api.ResponseListener
 import com.linderaredux.api.response.BaseResponse
@@ -12,11 +13,10 @@ import com.linderaredux.utils.Session
 import com.linderaredux.utils.SharedPreferenceHelper
 import com.linderaredux.utils.Sort
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
 
-class MainViewModel(linderaService: LinderaService, session: Session,dataManager: DataManager) : BaseViewModel<MainNavigator>(linderaService, session, dataManager) {
+class MainViewModel(linderaService: LinderaService, session: Session, dataManager: DataManager) : BaseViewModel<MainNavigator>(linderaService, session, dataManager) {
 
     fun userHome() {
         getCompositeDisposable()?.add(getLinderaService().userHome(object : ResponseListener<Response<BaseResponse<UserHome>>, String> {
@@ -75,8 +75,10 @@ class MainViewModel(linderaService: LinderaService, session: Session,dataManager
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    if(it){
-                        getDataManager().allPatients
+                    if (it) {
+                        getDataManager().allPatients.subscribe {
+                            Log.d("mytag", "Local Size::" + it.size)
+                        }
                     }
                 })
 

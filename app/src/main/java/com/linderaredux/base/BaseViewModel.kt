@@ -3,11 +3,10 @@ package com.linderaredux.base
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
 import com.linderaredux.api.service.LinderaService
+import com.linderaredux.db.DataManager
 import com.linderaredux.utils.Session
 import io.reactivex.disposables.CompositeDisposable
 import java.lang.ref.WeakReference
-import com.linderaredux.db.DataManager
-
 
 
 abstract class BaseViewModel<N> : ViewModel {

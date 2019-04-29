@@ -2,14 +2,13 @@ package com.linderaredux.dagger.module
 
 import android.app.Application
 import android.content.Context
+import androidx.room.Room
+import com.linderaredux.db.*
+import com.linderaredux.utils.Constant
 import com.linderaredux.utils.Session
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
-import androidx.room.Room
-import com.linderaredux.db.*
-import com.linderaredux.db.DatabaseInfo
-import com.linderaredux.utils.Constant
 
 
 @Module
@@ -27,29 +26,21 @@ class AppModule {
         return Session(context)
     }
 
-
     @Provides
     @Singleton
-    fun provideAppDatabase(@DatabaseInfo dbName: String, context: Context): AppDatabase {
-        return Room.databaseBuilder(context, AppDatabase::class.java, dbName).fallbackToDestructiveMigration()
-                .build()
+    fun provideAppDatabase(context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, Constant.DB_NAME).allowMainThreadQueries().build()
     }
 
     @Provides
     @Singleton
-    fun provideDataManager(appDataManager: AppDataManager): DataManager {
-        return appDataManager
+    fun provideDataManager(appDbHelper: AppDbHelper): DataManager {
+        return DataManager(appDbHelper)
     }
 
     @Provides
     @Singleton
-    fun provideDbHelper(appDbHelper: AppDbHelper): DbHelper {
-        return appDbHelper
-    }
-
-    @Provides
-    @DatabaseInfo
-    fun provideDatabaseName(): String {
-        return Constant.DB_NAME
+    fun provideDbHelper(appDatabase: AppDatabase): AppDbHelper {
+        return AppDbHelper(appDatabase)
     }
 }

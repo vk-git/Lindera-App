@@ -15,7 +15,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun providesUCMService(session: Session, application: Application): LinderaService {
+    fun providesLinderaService(session: Session, application: Application): LinderaService {
         return LinderaService(RetrofitFactory.getRetrofit(session, application, BuildConfig.SERVICE_ENDPOINT).create(LinderaApi::class.java))
     }
 }
