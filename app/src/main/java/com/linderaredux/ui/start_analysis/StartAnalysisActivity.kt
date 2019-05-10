@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityStartAnalysisBinding
+import com.linderaredux.ui.splash.SplashViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class StartAnalysisActivity : BaseActivity<ActivityStartAnalysisBinding, StartAnalysisViewModel>(), StartAnalysisNavigator {
@@ -18,8 +21,11 @@ class StartAnalysisActivity : BaseActivity<ActivityStartAnalysisBinding, StartAn
         }
     }
 
-    @set:Inject
-    override var viewModel: StartAnalysisViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: StartAnalysisViewModel
+        get() = ViewModelProviders.of(this, factory).get(StartAnalysisViewModel::class.java)
 
     private var mActivityStartAnalysisBinding: ActivityStartAnalysisBinding? = null
 

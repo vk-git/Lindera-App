@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.SurfaceHolder
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.devbrackets.android.exomedia.listener.OnPreparedListener
 import com.google.android.exoplayer2.DefaultLoadControl
 import com.google.android.exoplayer2.ExoPlayerFactory
@@ -25,6 +26,8 @@ import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityTutorialVideoBinding
+import com.linderaredux.ui.terms_of_use.TermsOfUseViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class TutorialVideoActivity : BaseActivity<ActivityTutorialVideoBinding, TutorialVideoViewModel>(), TutorialVideoNavigator, OnPreparedListener {
@@ -36,8 +39,11 @@ class TutorialVideoActivity : BaseActivity<ActivityTutorialVideoBinding, Tutoria
         }
     }
 
-    @set:Inject
-    override var viewModel: TutorialVideoViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: TutorialVideoViewModel
+        get() = ViewModelProviders.of(this, factory).get(TutorialVideoViewModel::class.java)
 
     private var mActivityTutorialVideoBinding: ActivityTutorialVideoBinding? = null
 

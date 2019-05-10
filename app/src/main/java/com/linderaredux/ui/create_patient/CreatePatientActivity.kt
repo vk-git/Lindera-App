@@ -6,13 +6,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
+import androidx.lifecycle.ViewModelProviders
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.linderaredux.BR
 import com.linderaredux.R
+import com.linderaredux.api.response.patient.Patient
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityCreatePatientBinding
+import com.linderaredux.ui.contact.ContactViewModel
+import com.linderaredux.ui.edit_patient.EditPatientActivity
+import com.linderaredux.ui.main.MainActivity
+import com.linderaredux.utils.Constant
 import com.linderaredux.utils.Validation
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class CreatePatientActivity : BaseActivity<ActivityCreatePatientBinding, CreatePatientViewModel>(), CreatePatientNavigator {
@@ -23,8 +30,11 @@ class CreatePatientActivity : BaseActivity<ActivityCreatePatientBinding, CreateP
         }
     }
 
-    @set:Inject
-    override var viewModel: CreatePatientViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: CreatePatientViewModel
+        get() = ViewModelProviders.of(this, factory).get(CreatePatientViewModel::class.java)
 
     private var mActivityCreatePatientBinding: ActivityCreatePatientBinding? = null
 
@@ -140,8 +150,15 @@ class CreatePatientActivity : BaseActivity<ActivityCreatePatientBinding, CreateP
         return validInput
     }
 
+    override fun onSuccessfullyCreated(patient: Patient) {
+        val intent = EditPatientActivity.newIntent(this)
+        intent.putExtra(Constant.PARAM_PATIENT, patient)
+        startActivity(intent)
+        finish()
+    }
+
     private fun getGender(): String {
-        return if (mActivityCreatePatientBinding!!.spinnerDementia.text.toString() == "Man") {
+        return if (mActivityCreatePatientBinding!!.spinnerDementia.text.toString() == getString(R.string.man)) {
             "m"
         } else {
             "w"

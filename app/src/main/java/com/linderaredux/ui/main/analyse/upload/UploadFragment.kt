@@ -15,6 +15,8 @@ import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.FragmentHomeBinding
 import com.linderaredux.databinding.FragmentUploadBinding
 import com.linderaredux.ui.main.MainActivity
+import com.linderaredux.ui.main.analyse.processing.ProcessingViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class UploadFragment : BaseFragment<FragmentUploadBinding, UploadViewModel>(), UploadNavigator {
@@ -28,8 +30,11 @@ class UploadFragment : BaseFragment<FragmentUploadBinding, UploadViewModel>(), U
         }
     }
 
-    @set:Inject
-    var mViewModelFactory: ViewModelProvider.Factory? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: UploadViewModel
+        get() = ViewModelProviders.of(this, factory).get(UploadViewModel::class.java)
 
     @set:Inject
     var mAnalysisBoxAdapter: AnalysisBoxAdapter? = null
@@ -41,9 +46,6 @@ class UploadFragment : BaseFragment<FragmentUploadBinding, UploadViewModel>(), U
 
     override val layoutId: Int
         get() = R.layout.fragment_upload
-
-    override val viewModel: UploadViewModel
-        get() = ViewModelProviders.of(this, mViewModelFactory).get(UploadViewModel::class.java)
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -4,5 +4,6 @@ import com.linderaredux.base.BaseNavigator
 
 
 interface EditPatientNavigator : BaseNavigator {
-
+    fun onDeletePatient()
+    fun onStartAnalysis()
 }

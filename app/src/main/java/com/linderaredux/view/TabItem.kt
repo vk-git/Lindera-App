@@ -9,6 +9,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.linderaredux.R
+import com.linderaredux.extensions.gone
+import com.linderaredux.extensions.visible
 
 class TabItem(context: Context) : LinearLayout(context) {
 
@@ -38,10 +40,10 @@ class TabItem(context: Context) : LinearLayout(context) {
 
     fun setBadgeCount(count: Int) {
         if (count > 0) {
-            badgeCotainer.visibility = View.VISIBLE
+            badgeCotainer.visible()
             badge.text = "$count"
         } else {
-            badgeCotainer.visibility = View.GONE
+            badgeCotainer.gone()
         }
     }
 }

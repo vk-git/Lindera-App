@@ -12,11 +12,6 @@ import dagger.Provides
 class LandingActivityModule {
 
     @Provides
-    fun provideLandingViewModel(linderaService: LinderaService, session: Session,dataManager: DataManager): LandingViewModel {
-        return LandingViewModel(linderaService, session,dataManager)
-    }
-
-    @Provides
     fun provideCustomPagerAdapter(context: Context): CustomPagerAdapter{
         return CustomPagerAdapter(context)
     }

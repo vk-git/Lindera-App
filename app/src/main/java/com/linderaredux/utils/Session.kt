@@ -39,17 +39,6 @@ class Session(context: Context) {
         })
     }
 
-    fun setPatientList(patientSections: ArrayList<PatientSection>) {
-        editor.putString(APP_USER_PATIENT_LIST, SharedPreferenceHelper.getStringFromObject(patientSections))
-        editor.apply()
-    }
-
-    fun getPatientList(): ArrayList<PatientSection> {
-        return SharedPreferenceHelper.getObjectFromString(pref.getString(APP_USER_PATIENT_LIST, ""), object :
-                TypeToken<ArrayList<PatientSection>>() {
-        })
-    }
-
     fun setArchiveList(patientList: ArrayList<Patient>) {
         editor.putString(APP_USER_ARCHIVE_LIST, SharedPreferenceHelper.getStringFromObject(patientList))
         editor.apply()

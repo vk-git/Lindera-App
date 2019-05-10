@@ -11,11 +11,6 @@ import dagger.Provides
 class ChoosePatientActivityModule {
 
     @Provides
-    fun provideChoosePatientViewModel(linderaService: LinderaService, session: Session,dataManager: DataManager): ChoosePatientViewModel {
-        return ChoosePatientViewModel(linderaService, session,dataManager)
-    }
-
-    @Provides
     fun providePatientAdapter(): PatientAdapter {
         return PatientAdapter()
     }

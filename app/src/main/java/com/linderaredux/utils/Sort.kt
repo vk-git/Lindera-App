@@ -8,20 +8,27 @@ import java.util.*
 object Sort {
 
     fun onPatientList(list: List<Patient>) {
-        Collections.sort(list, object : Comparator<Patient> {
-            override fun compare(o1: Patient?, o2: Patient?): Int {
-                val genreA = o2!!.lastname!!.toUpperCase()
-                val genreB = o1!!.lastname!!.toUpperCase()
+        Collections.sort(list) { o1, o2 ->
+            val a1 = o1.lastname.toUpperCase()
+            val b1 = o2.lastname.toUpperCase()
+            val c1 = o1.firstname.toUpperCase()
+            val d1 = o2.firstname.toUpperCase()
 
-                var comparison = 0
-                if (genreA > genreB) {
-                    comparison = 1
-                } else if (genreA < genreB) {
-                    comparison = -1
-                }
-                return comparison
+            if (c1.matches("\\d+".toRegex()) && d1.matches("\\d+".toRegex())) {
+                val a = c1.toInt()
+                val b = d1.toInt()
+                if (a < b) -1
+                if (a > b) 1
+                0
             }
-        })
+
+            if (a1 > b1) {
+                1
+            } else if (a1 < b1) {
+                -1
+            }
+            0
+        }
     }
 
     fun onPatientListWithAlphabeticalSection(list: List<Patient>): ArrayList<PatientSection> {
@@ -30,7 +37,7 @@ object Sort {
         for (patient in list) {
             val key = patient.firstname!![0].toUpperCase().toString()
             if (patientByAlpha[key] == null) {
-                patientByAlpha[key] = ArrayList<Patient>()
+                patientByAlpha[key] = ArrayList()
             }
             patientByAlpha[key]!!.add(patient)
         }

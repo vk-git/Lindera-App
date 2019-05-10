@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityProfileBinding
+import com.linderaredux.ui.privacy_policy.PrivacyPolicyViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>(), ProfileNavigator {
@@ -18,8 +21,11 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding, ProfileViewModel>()
         }
     }
 
-    @set:Inject
-    override var viewModel: ProfileViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: ProfileViewModel
+        get() = ViewModelProviders.of(this, factory).get(ProfileViewModel::class.java)
 
     private var mActivityProfileBinding: ActivityProfileBinding? = null
 

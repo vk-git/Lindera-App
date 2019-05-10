@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityFacilityBinding
+import com.linderaredux.ui.edit_patient.EditPatientViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class FacilityActivity : BaseActivity<ActivityFacilityBinding, FacilityViewModel>(), FacilityNavigator {
@@ -18,8 +21,11 @@ class FacilityActivity : BaseActivity<ActivityFacilityBinding, FacilityViewModel
         }
     }
 
-    @set:Inject
-    override var viewModel: FacilityViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: FacilityViewModel
+        get() = ViewModelProviders.of(this, factory).get(FacilityViewModel::class.java)
 
     private var mActivityFacilityBinding: ActivityFacilityBinding? = null
 

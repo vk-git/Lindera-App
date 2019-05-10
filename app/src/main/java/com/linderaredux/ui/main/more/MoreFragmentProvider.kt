@@ -6,6 +6,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class MoreFragmentProvider {
 
-    @ContributesAndroidInjector(modules = [MoreFragmentModule::class])
+    @ContributesAndroidInjector
     internal abstract fun provideMoreFragmentFactory(): MoreFragment
 }

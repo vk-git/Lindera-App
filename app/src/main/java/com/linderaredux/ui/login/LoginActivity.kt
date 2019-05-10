@@ -5,16 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.google.gson.JsonObject
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityLoginBinding
 import com.linderaredux.ui.confirm_account.ConfirmAccountActivity
+import com.linderaredux.ui.landing.LandingViewModel
 import com.linderaredux.ui.main.MainActivity
 import com.linderaredux.ui.register.RegisterActivity
 import com.linderaredux.utils.Validation
 import com.linderaredux.utils.Validation.ValidationType
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 
@@ -26,8 +29,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), Logi
         }
     }
 
-    @set:Inject
-    override var viewModel: LoginViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: LoginViewModel
+        get() = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
 
     private var mActivityLoginBinding: ActivityLoginBinding? = null
 

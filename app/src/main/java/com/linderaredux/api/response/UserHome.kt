@@ -21,4 +21,6 @@ data class UserHome(@SerializedName("zip")
                     @SerializedName("status")
                     val status: String,
                     @SerializedName("timestamp")
-                    val timestamp: String)
+                    val timestamp: String,
+                    @SerializedName("settings")
+                    val settings: Any)

@@ -1,18 +1,23 @@
 package com.linderaredux.db
 
+import androidx.lifecycle.LiveData
 import com.linderaredux.api.response.patient.Patient
-
-import javax.inject.Inject
-import javax.inject.Singleton
-
 import io.reactivex.Observable
 
-class DataManager(internal var appDbHelper: AppDbHelper) {
+class DataManager(private var appDbHelper: AppDbHelper) {
 
-    val allPatients: Observable<List<Patient>>
+    val allPatients: LiveData<List<Patient>>
         get() = appDbHelper.allPatients
 
     fun savePatientList(patientList: List<Patient>): Observable<Boolean> {
         return appDbHelper.savePatientList(patientList)
+    }
+
+    fun savePatient(item: Patient) {
+        return appDbHelper.savePatient(item)
+    }
+
+    fun deletePatientById(patientId: String) {
+        return appDbHelper.deletePatientById(patientId)
     }
 }

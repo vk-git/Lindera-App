@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityContactBinding
+import com.linderaredux.ui.confirm_account.ConfirmAccountViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class ContactActivity : BaseActivity<ActivityContactBinding, ContactViewModel>(), ContactNavigator {
@@ -18,8 +21,11 @@ class ContactActivity : BaseActivity<ActivityContactBinding, ContactViewModel>()
         }
     }
 
-    @set:Inject
-    override var viewModel: ContactViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: ContactViewModel
+        get() = ViewModelProviders.of(this, factory).get(ContactViewModel::class.java)
 
     private var mActivityContactBinding: ActivityContactBinding? = null
 

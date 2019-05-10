@@ -10,7 +10,10 @@ import com.linderaredux.databinding.ActivityRegisterBinding
 import com.linderaredux.ui.login.LoginActivity
 import javax.inject.Inject
 import android.widget.ArrayAdapter
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.R
+import com.linderaredux.ui.profile.ProfileViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel>(), RegisterNavigator {
 
@@ -21,8 +24,11 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
         }
     }
 
-    @set:Inject
-    override var viewModel: RegisterViewModel? = null
+   @set:Inject
+    var factory: ViewModelProviderFactory? = null
+
+    override val viewModel: RegisterViewModel
+        get() = ViewModelProviders.of(this, factory).get(RegisterViewModel::class.java)
 
     private var mActivityRegisterBinding: ActivityRegisterBinding? = null
 

@@ -3,8 +3,10 @@ package com.linderaredux.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.tabs.TabLayout
 import com.linderaredux.BR
 import com.linderaredux.R
@@ -12,6 +14,7 @@ import com.linderaredux.api.response.PatientType
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.ActivityMainBinding
+import com.linderaredux.ui.login.LoginViewModel
 import com.linderaredux.ui.main.analyse.AnalyseFragment
 import com.linderaredux.ui.main.home.HomeFragment
 import com.linderaredux.ui.main.more.MoreFragment
@@ -19,6 +22,7 @@ import com.linderaredux.ui.main.patient.PatientFragment
 import com.linderaredux.utils.FragNavController
 import com.linderaredux.utils.FragNavTransactionOptions
 import com.linderaredux.utils.FragmentHistory
+import com.linderaredux.utils.ViewModelProviderFactory
 import com.linderaredux.view.TabItem
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -39,10 +43,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     }
 
     @set:Inject
-    var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>? = null
+    lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
-    @set:Inject
-    override var viewModel: MainViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: MainViewModel
+        get() = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
 
     private var mActivityMainBinding: ActivityMainBinding? = null
 
@@ -77,46 +84,49 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
 
         fragmentHistory = FragmentHistory()
 
-        mNavController = FragNavController.newBuilder(savedInstanceState, supportFragmentManager, R.id.container)
-                .transactionListener(this)
-                .rootFragmentListener(this, (tabs as Array<String>).size)
-                .build()
+        supportFragmentManager?.run {
+            mNavController = FragNavController.newBuilder(savedInstanceState, this, R.id.container)
+                    .transactionListener(this@MainActivity)
+                    .rootFragmentListener(this@MainActivity, (tabs as Array<String>).size)
+                    .build()
+        }
 
         initTab()
 
-        mActivityMainBinding!!.bottomTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                fragmentHistory?.push(tab.position)
-                switchTab(tab.position)
-                updateTabSelection(tab.position)
-            }
+        mActivityMainBinding?.run {
+            bottomTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    fragmentHistory?.push(tab.position)
+                    switchTab(tab.position)
+                    updateTabSelection(tab.position)
+                }
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                updateTabSelection(tab.position)
-            }
+                override fun onTabUnselected(tab: TabLayout.Tab) {
+                    updateTabSelection(tab.position)
+                }
 
-            override fun onTabReselected(tab: TabLayout.Tab) {
-                mNavController?.clearStack()
-                fragmentHistory?.push(tab.position)
-                switchTab(tab.position)
-                updateTabSelection(tab.position)
-            }
-        })
+                override fun onTabReselected(tab: TabLayout.Tab) {
+                    mNavController?.clearStack()
+                    fragmentHistory?.push(tab.position)
+                    switchTab(tab.position)
+                    updateTabSelection(tab.position)
+                }
+            })
+        }
 
         switchTab(0)
         setTabViewSelectedColor(bottomTabLayout.getTabAt(0)!!)
-
     }
 
     fun loadHomeData() {
-        viewModel?.let {
-            it.userHome()
+        viewModel?.run {
+            userHome()
         }
     }
 
     fun loadPatientsData() {
-        viewModel?.let {
-            it.userPatients()
+        viewModel?.run {
+            userPatients()
         }
     }
 
@@ -124,8 +134,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         val currentFrag = mNavController!!.currentFrag
         if (currentFrag is HomeFragment) {
             currentFrag.setDashBoardData()
-        } else if (currentFrag is PatientFragment) {
-            currentFrag.setPatientData()
         }
     }
 
@@ -133,8 +141,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
         val currentFrag = mNavController!!.currentFrag
         if (currentFrag is HomeFragment) {
             currentFrag.setDashBoardData()
-        } else if (currentFrag is PatientFragment) {
-            currentFrag.setPatientData()
         }
     }
 
@@ -166,11 +172,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     }
 
     private fun switchTab(position: Int) {
-        mNavController?.switchTab(position)
+        mNavController?.run {
+            switchTab(position)
+        }
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return fragmentDispatchingAndroidInjector!!
+        return fragmentDispatchingAndroidInjector
     }
 
     override fun onBackPressed() {
@@ -208,14 +216,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mNavController?.onSaveInstanceState(outState)
+        mNavController?.run { onSaveInstanceState(outState) }
     }
 
     override fun pushFragment(fragment: Fragment) {
-        val customAnimation =
-                FragNavTransactionOptions.newBuilder().customAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
-                        .build()
-        mNavController?.pushFragment(fragment, customAnimation)
+        val customAnimation = FragNavTransactionOptions.newBuilder().customAnimations(R.anim.enter_from_right, R.anim.exit_to_left).build()
+        mNavController?.run { pushFragment(fragment, customAnimation) }
     }
 
     override fun onTabTransaction(fragment: Fragment, index: Int) {
@@ -255,15 +261,21 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     }
 
     fun updateToolbarRightButtonText(txtRight: String) {
-        mActivityMainBinding!!.navToolbar.setRightText(txtRight)
+        mActivityMainBinding?.run {
+            navToolbar.setRightText(txtRight)
+        }
     }
 
-    fun showToolbarRightText(isShow: Boolean){
-        mActivityMainBinding!!.navToolbar.showRightText(isShow)
+    fun showToolbarRightText(isShow: Boolean) {
+        mActivityMainBinding?.run {
+            navToolbar.showRightText(isShow)
+        }
     }
 
     fun setRightButtonListener(listener: View.OnClickListener?) {
-        mActivityMainBinding!!.navToolbar.setRightButtonListener(listener)
+        mActivityMainBinding?.run {
+            navToolbar.setRightButtonListener(listener)
+        }
     }
 
     fun onGoToAnalysisScreen(patientType: PatientType) {

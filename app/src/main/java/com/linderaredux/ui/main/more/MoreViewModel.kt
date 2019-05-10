@@ -1,12 +1,13 @@
 package com.linderaredux.ui.main.more
 
+import android.app.Application
 import com.linderaredux.api.service.LinderaService
 import com.linderaredux.base.BaseViewModel
 import com.linderaredux.db.DataManager
 import com.linderaredux.utils.Session
 
 
-class MoreViewModel(linderaService: LinderaService, session: Session,dataManager: DataManager) : BaseViewModel<MoreNavigator>(linderaService, session, dataManager) {
+class MoreViewModel(application: Application, linderaService: LinderaService, session: Session, dataManager: DataManager) : BaseViewModel<MoreNavigator>(application, linderaService, session, dataManager) {
 
     fun onHowRecordAnalysisClick() {
         getNavigator()?.onHowRecordAnalysisScreen()
@@ -16,7 +17,7 @@ class MoreViewModel(linderaService: LinderaService, session: Session,dataManager
         getNavigator()?.onChangePasswordScreen()
     }
 
-    fun onDeleteAccountClick(){
+    fun onDeleteAccountClick() {
         getNavigator()?.onDeleteAccountScreen()
     }
 

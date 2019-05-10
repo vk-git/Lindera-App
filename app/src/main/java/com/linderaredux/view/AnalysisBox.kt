@@ -14,6 +14,8 @@ import antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
 import com.linderaredux.R
 import com.linderaredux.api.response.PatientType
 import com.linderaredux.api.response.patient.Patient
+import com.linderaredux.extensions.gone
+import com.linderaredux.extensions.visible
 import com.linderaredux.utils.DateUtils
 
 class AnalysisBox : LinearLayout {
@@ -68,9 +70,9 @@ class AnalysisBox : LinearLayout {
             //val patientScoreInt = getPatientScore(patient)
             val patientScoreInt = -1
             if (patientScoreInt != -1) {
-                patientScore.visibility = View.VISIBLE
+                patientScore.visible()
             } else {
-                patientScore.visibility = View.GONE
+                patientScore.gone()
                 patientScoreMsg.text = "Coming Soon\nfall probability"
             }
 

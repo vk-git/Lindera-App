@@ -7,21 +7,25 @@ import com.linderaredux.api.response.UserHome
 import com.linderaredux.api.response.patient.Patient
 import io.reactivex.Observable
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface LinderaApi {
 
-    @POST("user/login")
+    @POST("session")
     fun userLogin(@Body loginReq: JsonObject): Observable<Response<BaseResponse<AppUser>>>
 
-    @GET("home/image")
-    fun userHome(): Observable<Response<BaseResponse<UserHome>>>
+    @GET("homes/{homeId}")
+    fun userHome(@Path("homeId") homeId: String): Observable<Response<BaseResponse<UserHome>>>
 
-    @GET("patient/recent")
+    @GET("patients")
     fun userPatients(): Observable<Response<BaseResponse<List<Patient>>>>
 
-    @POST("patient")
+    @POST("patients")
     fun userCreatePatient(@Body patientReq: JsonObject): Observable<Response<BaseResponse<Patient>>>
+
+    @DELETE("patients/{patientId}")
+    fun deletePatient(@Path("patientId") patientId: String): Observable<Response<BaseResponse<Patient>>>
+
+    @DELETE("users/{userId}")
+    fun deleteUser(@Path("userId") userId: String): Observable<Response<BaseResponse<AppUser>>>
 }

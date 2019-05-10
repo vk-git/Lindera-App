@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityContactBinding
 import com.linderaredux.databinding.ActivityImprintBinding
+import com.linderaredux.ui.facility.FacilityViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class ImprintActivity : BaseActivity<ActivityImprintBinding, ImprintViewModel>(), ImprintNavigator {
@@ -19,8 +22,11 @@ class ImprintActivity : BaseActivity<ActivityImprintBinding, ImprintViewModel>()
         }
     }
 
-    @set:Inject
-    override var viewModel: ImprintViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: ImprintViewModel
+        get() = ViewModelProviders.of(this, factory).get(ImprintViewModel::class.java)
 
     private var mActivityImprintBinding: ActivityImprintBinding? = null
 

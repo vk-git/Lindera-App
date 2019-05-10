@@ -1,10 +1,9 @@
 package com.linderaredux.ui.main.patient
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.Nullable
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
@@ -17,9 +16,10 @@ import com.linderaredux.ui.create_patient.CreatePatientActivity
 import com.linderaredux.ui.edit_patient.EditPatientActivity
 import com.linderaredux.ui.main.MainActivity
 import com.linderaredux.utils.Constant
+import com.linderaredux.utils.Sort
+import com.linderaredux.utils.ViewModelProviderFactory
 import com.linderaredux.view.Alphabetik
 import org.zakariya.stickyheaders.StickyHeaderLayoutManager
-import java.util.*
 import javax.inject.Inject
 
 
@@ -35,7 +35,10 @@ class PatientFragment : BaseFragment<FragmentPatientBinding, PatientViewModel>()
     }
 
     @set:Inject
-    var mViewModelFactory: ViewModelProvider.Factory? = null
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: PatientViewModel
+        get() = ViewModelProviders.of(this, factory).get(PatientViewModel::class.java)
 
     @set:Inject
     var mPatientAdapter: PatientAdapter? = null
@@ -50,9 +53,6 @@ class PatientFragment : BaseFragment<FragmentPatientBinding, PatientViewModel>()
 
     var patientSections = ArrayList<PatientSection>()
 
-    override val viewModel: PatientViewModel
-        get() = ViewModelProviders.of(this, mViewModelFactory).get(PatientViewModel::class.java)
-
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel?.setNavigator(this)
@@ -64,28 +64,38 @@ class PatientFragment : BaseFragment<FragmentPatientBinding, PatientViewModel>()
 
         (activity as MainActivity).updateToolbarTitle("Patients")
         (activity as MainActivity).showToolbarRightText(false)
-        (activity as MainActivity).loadPatientsData()
+        //(activity as MainActivity).loadPatientsData()
 
-        setPatientData()
+        viewModel?.run {
+            allPatients.observeForever { patientList ->
+                Log.d("mytag","patientList::"+patientList.size)
+                setPatientData(patientList)
+            }
+        }
     }
 
-    fun setPatientData() {
-        mFragmentPatientBinding!!.recyclerView.layoutManager = StickyHeaderLayoutManager()
-        mFragmentPatientBinding!!.recyclerView.adapter = mPatientAdapter
-
-        patientSections = viewModel.getSession().getPatientList()
-        patientSections?.let {
-            mPatientAdapter?.setPatientSections(it)
+    private fun setPatientData(patientList: List<Patient>) {
+        with(mFragmentPatientBinding!!.recyclerView) {
+            layoutManager = StickyHeaderLayoutManager()
+            adapter = mPatientAdapter
         }
 
-        mPatientAdapter!!.setOnPatientItemListener(object : PatientAdapter.OnPatientItemListener {
-            override fun onItemClick(patient: Patient) {
-                Toast.makeText(context, patient.firstname, Toast.LENGTH_SHORT).show()
-                val intent = EditPatientActivity.newIntent(activity as MainActivity)
-                intent.putExtra(Constant.PARAM_PATIENT, patient)
-                startActivity(intent)
+        patientList?.run {
+            val patientSectionList = Sort.onPatientListWithAlphabeticalSection(this)
+
+            patientSections = patientSectionList
+            patientSections?.run {
+                mPatientAdapter?.setPatientSections(this)
             }
-        })
+
+            mPatientAdapter!!.setOnPatientItemListener(object : PatientAdapter.OnPatientItemListener {
+                override fun onItemClick(patient: Patient) {
+                    val intent = EditPatientActivity.newIntent(activity as MainActivity)
+                    intent.putExtra(Constant.PARAM_PATIENT, patient)
+                    startActivity(intent)
+                }
+            })
+        }
 
         mFragmentPatientBinding!!.createNewPatientLayout.setOnClickListener {
             val intent = CreatePatientActivity.newIntent(activity as MainActivity)

@@ -4,10 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityConfirmAccountBinding
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class ConfirmAccountActivity : BaseActivity<ActivityConfirmAccountBinding, ConfirmAccountViewModel>(), ConfirmAccountNavigator {
@@ -18,8 +20,11 @@ class ConfirmAccountActivity : BaseActivity<ActivityConfirmAccountBinding, Confi
         }
     }
 
-    @set:Inject
-    override var viewModel: ConfirmAccountViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: ConfirmAccountViewModel
+        get() = ViewModelProviders.of(this, factory).get(ConfirmAccountViewModel::class.java)
 
     private var mActivityConfirmAccountBinding: ActivityConfirmAccountBinding? = null
 

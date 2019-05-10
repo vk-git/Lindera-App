@@ -1,5 +1,6 @@
 package com.linderaredux.ui.login
 
+import android.app.Application
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.linderaredux.api.ResponseListener
@@ -13,7 +14,7 @@ import com.linderaredux.utils.SharedPreferenceHelper
 import retrofit2.Response
 
 
-class LoginViewModel(linderaService: LinderaService, session: Session,dataManager: DataManager) : BaseViewModel<LoginNavigator>(linderaService, session, dataManager) {
+class LoginViewModel(application: Application, linderaService: LinderaService, session: Session, dataManager: DataManager) : BaseViewModel<LoginNavigator>(application, linderaService, session, dataManager) {
 
     fun onRegisterButtonClick() {
         getNavigator()!!.onRegisterScreen()

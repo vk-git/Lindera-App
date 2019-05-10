@@ -4,6 +4,7 @@ import com.linderaredux.api.response.patient.Patient;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -17,14 +18,14 @@ public interface PatientDao {
     String getItemId(String id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Patient patient);
+    long insert(Patient patient);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     int update(Patient patient);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Patient> patientList);
+    @Query("DELETE FROM patient WHERE id = :patientId")
+    int deletePatientById(String patientId);
 
     @Query("SELECT * FROM patient")
-    List<Patient> loadAll();
+    LiveData<List<Patient>> loadAll();
 }

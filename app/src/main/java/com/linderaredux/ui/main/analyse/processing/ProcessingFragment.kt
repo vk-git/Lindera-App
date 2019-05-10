@@ -13,6 +13,8 @@ import com.linderaredux.adapter.AnalysisBoxAdapter
 import com.linderaredux.api.response.PatientType
 import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.FragmentProcessingBinding
+import com.linderaredux.ui.main.analyse.archive.ArchiveViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class ProcessingFragment : BaseFragment<FragmentProcessingBinding, ProcessingViewModel>(), ProcessingNavigator {
@@ -26,8 +28,11 @@ class ProcessingFragment : BaseFragment<FragmentProcessingBinding, ProcessingVie
         }
     }
 
-    @set:Inject
-    var mViewModelFactory: ViewModelProvider.Factory? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: ProcessingViewModel
+        get() = ViewModelProviders.of(this, factory).get(ProcessingViewModel::class.java)
 
     @set:Inject
     var mAnalysisBoxAdapter: AnalysisBoxAdapter? = null
@@ -39,9 +44,6 @@ class ProcessingFragment : BaseFragment<FragmentProcessingBinding, ProcessingVie
 
     override val layoutId: Int
         get() = R.layout.fragment_processing
-
-    override val viewModel: ProcessingViewModel
-        get() = ViewModelProviders.of(this, mViewModelFactory).get(ProcessingViewModel::class.java)
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

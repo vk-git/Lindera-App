@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.adapter.patient.PatientAdapter
@@ -12,6 +13,12 @@ import com.linderaredux.adapter.patient.PatientSection
 import com.linderaredux.api.response.patient.Patient
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityChoosePatientBinding
+import com.linderaredux.ui.change_password.ChangePasswordViewModel
+import com.linderaredux.ui.edit_patient.EditPatientActivity
+import com.linderaredux.ui.main.MainActivity
+import com.linderaredux.utils.Constant
+import com.linderaredux.utils.Sort
+import com.linderaredux.utils.ViewModelProviderFactory
 import com.linderaredux.view.Alphabetik
 import org.zakariya.stickyheaders.StickyHeaderLayoutManager
 import java.util.*
@@ -26,7 +33,10 @@ class ChoosePatientActivity : BaseActivity<ActivityChoosePatientBinding, ChooseP
     }
 
     @set:Inject
-    override var viewModel: ChoosePatientViewModel? = null
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: ChoosePatientViewModel
+        get() = ViewModelProviders.of(this, factory).get(ChoosePatientViewModel::class.java)
 
     @set:Inject
     var mPatientAdapter: PatientAdapter? = null
@@ -54,21 +64,29 @@ class ChoosePatientActivity : BaseActivity<ActivityChoosePatientBinding, ChooseP
             finish()
         })
 
-        setPatientData()
+        viewModel?.run {
+            getDataManager().allPatients.observeForever { patientList -> setPatientData(patientList) }
+        }
     }
 
-    private fun setPatientData() {
-        mActivityChoosePatientBinding!!.recyclerView.layoutManager = StickyHeaderLayoutManager()
-        mActivityChoosePatientBinding!!.recyclerView.adapter = mPatientAdapter
+    private fun setPatientData(patientList: List<Patient>) {
+        val patientSectionList = Sort.onPatientListWithAlphabeticalSection(patientList)
 
-        patientSections = viewModel!!.getSession().getPatientList()
+        with(mActivityChoosePatientBinding!!.recyclerView) {
+            layoutManager = StickyHeaderLayoutManager()
+            adapter = mPatientAdapter
+        }
+
+        patientSections = patientSectionList
         patientSections?.let {
             mPatientAdapter?.setPatientSections(it)
         }
 
         mPatientAdapter!!.setOnPatientItemListener(object : PatientAdapter.OnPatientItemListener {
             override fun onItemClick(patient: Patient) {
-                Toast.makeText(applicationContext, patient.firstname, Toast.LENGTH_SHORT).show()
+                val intent = EditPatientActivity.newIntent(this@ChoosePatientActivity)
+                intent.putExtra(Constant.PARAM_PATIENT, patient)
+                startActivity(intent)
             }
         })
 

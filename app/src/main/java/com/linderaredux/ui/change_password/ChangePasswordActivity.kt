@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityChangePasswordBinding
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
+
 
 class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding, ChangePasswordViewModel>(), ChangePasswordNavigator {
 
@@ -18,8 +21,11 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding, Chang
         }
     }
 
-    @set:Inject
-    override var viewModel: ChangePasswordViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: ChangePasswordViewModel
+        get() = ViewModelProviders.of(this, factory).get(ChangePasswordViewModel::class.java)
 
     private var mActivityChangePasswordBinding: ActivityChangePasswordBinding? = null
 

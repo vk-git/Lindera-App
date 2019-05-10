@@ -1,18 +1,19 @@
 package com.linderaredux.ui.landing
 
+import android.app.Application
 import com.linderaredux.api.service.LinderaService
 import com.linderaredux.base.BaseViewModel
 import com.linderaredux.db.DataManager
 import com.linderaredux.utils.Session
 
 
-class LandingViewModel(linderaService: LinderaService, session: Session,dataManager: DataManager) : BaseViewModel<LandingNavigator>(linderaService, session, dataManager) {
+class LandingViewModel(application: Application, linderaService: LinderaService, session: Session, dataManager: DataManager) : BaseViewModel<LandingNavigator>(application, linderaService, session, dataManager) {
 
-    fun onLoginButtonClick(){
+    fun onLoginButtonClick() {
         getNavigator()!!.onLoginScreen()
     }
 
-    fun onRegisterButtonClick(){
+    fun onRegisterButtonClick() {
         getNavigator()!!.onRegisterScreen()
     }
 }

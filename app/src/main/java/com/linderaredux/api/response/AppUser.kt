@@ -35,4 +35,6 @@ data class AppUser(@SerializedName("firstname")
                    @SerializedName("username")
                    val username: String,
                    @SerializedName("timestamp")
-                   val timestamp: String)
+                   val timestamp: String,
+                   @SerializedName("home")
+                   val userHome: UserHome)

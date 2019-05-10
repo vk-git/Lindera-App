@@ -1,5 +1,6 @@
 package com.linderaredux.ui.create_patient
 
+import android.app.Application
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.linderaredux.api.ResponseListener
@@ -13,17 +14,20 @@ import com.linderaredux.utils.SharedPreferenceHelper
 import retrofit2.Response
 
 
-class CreatePatientViewModel(linderaService: LinderaService, session: Session,dataManager: DataManager) : BaseViewModel<CreatePatientNavigator>(linderaService, session, dataManager) {
+class CreatePatientViewModel(application: Application, linderaService: LinderaService, session: Session, dataManager: DataManager) : BaseViewModel<CreatePatientNavigator>(application, linderaService, session, dataManager) {
 
     fun onSaveButtonClick() {
         getNavigator()?.onSaveHandle()
     }
 
-    fun userCreatePatient(patientReq: JsonObject){
+    fun userCreatePatient(patientReq: JsonObject) {
         getCompositeDisposable()?.add(getLinderaService().userCreatePatient(patientReq, object : ResponseListener<Response<BaseResponse<Patient>>, String> {
             override fun onSuccess(response: Response<BaseResponse<Patient>>) {
                 if (response.isSuccessful) {
-
+                    response.body()?.run {
+                        getDataManager().savePatient(data)
+                        getNavigator()?.onSuccessfullyCreated(data)
+                    }
                 } else {
                     val errorResponse = SharedPreferenceHelper.getObjectFromString(response.errorBody()!!.string(), object : TypeToken<BaseResponse<String>>() {})
                     getNavigator()?.handleError(errorResponse.data)

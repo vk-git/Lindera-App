@@ -13,6 +13,10 @@ import com.linderaredux.utils.ConnectionLiveData
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
+import io.sentry.android.AndroidSentryClientFactory
+import io.sentry.Sentry
+
+
 
 class App : Application(), HasActivityInjector, Application.ActivityLifecycleCallbacks {
 
@@ -37,6 +41,10 @@ class App : Application(), HasActivityInjector, Application.ActivityLifecycleCal
             .application(this)
             .build()
             .inject(this)
+
+        //Sentry Init
+       /* val sentryDsn = "https://0ac2d2f30caa4e26b89ef32b092bc4af@host:port/1?options"
+        Sentry.init(sentryDsn, AndroidSentryClientFactory(this))*/
 
         registerActivityLifecycleCallbacks(this)
     }

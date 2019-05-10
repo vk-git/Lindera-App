@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.Nullable
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
@@ -21,6 +20,7 @@ import com.linderaredux.ui.privacy_policy.PrivacyPolicyActivity
 import com.linderaredux.ui.profile.ProfileActivity
 import com.linderaredux.ui.terms_of_use.TermsOfUseActivity
 import com.linderaredux.ui.tutorial_video.TutorialVideoActivity
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class MoreFragment : BaseFragment<FragmentMoreBinding, MoreViewModel>(), MoreNavigator {
@@ -35,7 +35,10 @@ class MoreFragment : BaseFragment<FragmentMoreBinding, MoreViewModel>(), MoreNav
     }
 
     @set:Inject
-    var mViewModelFactory: ViewModelProvider.Factory? = null
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: MoreViewModel
+        get() = ViewModelProviders.of(this, factory).get(MoreViewModel::class.java)
 
     private var mFragmentMoreBinding: FragmentMoreBinding? = null
 
@@ -44,9 +47,6 @@ class MoreFragment : BaseFragment<FragmentMoreBinding, MoreViewModel>(), MoreNav
 
     override val layoutId: Int
         get() = R.layout.fragment_more
-
-    override val viewModel: MoreViewModel
-        get() = ViewModelProviders.of(this, mViewModelFactory).get(MoreViewModel::class.java)
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +67,6 @@ class MoreFragment : BaseFragment<FragmentMoreBinding, MoreViewModel>(), MoreNav
         viewModel.getSession().getAppUser()?.let {
             mFragmentMoreBinding!!.txtUserName.text = "${it.firstname} ${it.lastname}"
             mFragmentMoreBinding!!.txtUserStatus.text = "${it.status}"
-            mFragmentMoreBinding!!.txtAppUserHome.text = "${it}"
         }
         viewModel.getSession().getAppUserHome()?.let {
             mFragmentMoreBinding!!.txtAppUserHome.text = "${it.name}"

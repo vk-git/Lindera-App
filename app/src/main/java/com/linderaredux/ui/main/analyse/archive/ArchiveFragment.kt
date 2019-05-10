@@ -16,6 +16,8 @@ import com.linderaredux.databinding.FragmentArchiveBinding
 import com.linderaredux.databinding.FragmentHomeBinding
 import com.linderaredux.databinding.FragmentUploadBinding
 import com.linderaredux.ui.main.MainActivity
+import com.linderaredux.ui.main.analyse.AnalyseViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class ArchiveFragment : BaseFragment<FragmentArchiveBinding, ArchiveViewModel>(), ArchiveNavigator {
@@ -29,8 +31,11 @@ class ArchiveFragment : BaseFragment<FragmentArchiveBinding, ArchiveViewModel>()
         }
     }
 
-    @set:Inject
-    var mViewModelFactory: ViewModelProvider.Factory? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: ArchiveViewModel
+        get() = ViewModelProviders.of(this, factory).get(ArchiveViewModel::class.java)
 
     @set:Inject
     var mAnalysisBoxAdapter: AnalysisBoxAdapter? = null
@@ -42,9 +47,6 @@ class ArchiveFragment : BaseFragment<FragmentArchiveBinding, ArchiveViewModel>()
 
     override val layoutId: Int
         get() = R.layout.fragment_archive
-
-    override val viewModel: ArchiveViewModel
-        get() = ViewModelProviders.of(this, mViewModelFactory).get(ArchiveViewModel::class.java)
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

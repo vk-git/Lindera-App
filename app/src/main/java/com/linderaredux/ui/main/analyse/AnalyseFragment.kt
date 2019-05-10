@@ -13,6 +13,8 @@ import com.linderaredux.api.response.PatientType
 import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.FragmentAnalyseBinding
 import com.linderaredux.ui.main.MainActivity
+import com.linderaredux.ui.main.home.HomeViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class AnalyseFragment : BaseFragment<FragmentAnalyseBinding, AnalyseViewModel>(), AnalyseNavigator {
@@ -26,8 +28,11 @@ class AnalyseFragment : BaseFragment<FragmentAnalyseBinding, AnalyseViewModel>()
         }
     }
 
-    @set:Inject
-    var mViewModelFactory: ViewModelProvider.Factory? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: AnalyseViewModel
+        get() = ViewModelProviders.of(this, factory).get(AnalyseViewModel::class.java)
 
     @set:Inject
     var mAnalysisAdapter: AnalysisAdapter? = null
@@ -39,9 +44,6 @@ class AnalyseFragment : BaseFragment<FragmentAnalyseBinding, AnalyseViewModel>()
 
     override val layoutId: Int
         get() = R.layout.fragment_analyse
-
-    override val viewModel: AnalyseViewModel
-        get() = ViewModelProviders.of(this, mViewModelFactory).get(AnalyseViewModel::class.java)
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

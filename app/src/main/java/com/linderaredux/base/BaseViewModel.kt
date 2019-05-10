@@ -1,7 +1,11 @@
 package com.linderaredux.base
 
+import android.app.Application
 import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.linderaredux.api.response.patient.Patient
 import com.linderaredux.api.service.LinderaService
 import com.linderaredux.db.DataManager
 import com.linderaredux.utils.Session
@@ -9,7 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 import java.lang.ref.WeakReference
 
 
-abstract class BaseViewModel<N> : ViewModel {
+abstract class BaseViewModel<N> : AndroidViewModel {
 
     private val mDataManager: DataManager
 
@@ -24,7 +28,10 @@ abstract class BaseViewModel<N> : ViewModel {
     private val mIsLoading = ObservableBoolean(false)
     private val mIsEmptyView = ObservableBoolean(false)
 
-    constructor(linderaService: LinderaService, session: Session, mDataManager: DataManager) {
+    val allPatients: LiveData<List<Patient>>
+        get() =  getDataManager().allPatients
+
+    constructor(application: Application, linderaService: LinderaService, session: Session, mDataManager: DataManager) : super(application) {
         this.mLinderaService = linderaService
         this.mSession = session
         this.mCompositeDisposable = CompositeDisposable()

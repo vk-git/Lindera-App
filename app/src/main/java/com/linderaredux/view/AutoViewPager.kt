@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.viewpager.widget.ViewPager
 import com.linderaredux.R
+import com.linderaredux.extensions.lastItem
 
 class AutoViewPager : ViewPager, Runnable {
 

@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityContactBinding
 import com.linderaredux.databinding.ActivityPrivacyPolicyBinding
+import com.linderaredux.ui.main.MainViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class PrivacyPolicyActivity : BaseActivity<ActivityPrivacyPolicyBinding, PrivacyPolicyViewModel>(), PrivacyPolicyNavigator {
@@ -19,8 +22,11 @@ class PrivacyPolicyActivity : BaseActivity<ActivityPrivacyPolicyBinding, Privacy
         }
     }
 
-    @set:Inject
-    override var viewModel: PrivacyPolicyViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: PrivacyPolicyViewModel
+        get() = ViewModelProviders.of(this, factory).get(PrivacyPolicyViewModel::class.java)
 
     private var mActivityPrivacyPolicyBinding: ActivityPrivacyPolicyBinding? = null
 

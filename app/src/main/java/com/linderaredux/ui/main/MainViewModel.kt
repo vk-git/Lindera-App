@@ -1,5 +1,6 @@
 package com.linderaredux.ui.main
 
+import android.app.Application
 import android.util.Log
 import com.google.gson.reflect.TypeToken
 import com.linderaredux.api.ResponseListener
@@ -16,19 +17,24 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
 
-class MainViewModel(linderaService: LinderaService, session: Session, dataManager: DataManager) : BaseViewModel<MainNavigator>(linderaService, session, dataManager) {
+class MainViewModel(application: Application, linderaService: LinderaService, session: Session, dataManager: DataManager) : BaseViewModel<MainNavigator>(application, linderaService, session, dataManager) {
 
     fun userHome() {
-        getCompositeDisposable()?.add(getLinderaService().userHome(object : ResponseListener<Response<BaseResponse<UserHome>>, String> {
+        val homeId = getSession().getAppUser()?.run { userHome.Id }
+        getCompositeDisposable()?.add(getLinderaService().userHome(homeId, object : ResponseListener<Response<BaseResponse<UserHome>>, String> {
             override fun onSuccess(response: Response<BaseResponse<UserHome>>) {
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        getSession().setAppUserHome(it.data)
+                    response.body()?.run {
+                        getSession().setAppUserHome(data)
                     }
                     getNavigator()?.onHomeDataUpdate()
                 } else {
-                    val errorResponse = SharedPreferenceHelper.getObjectFromString(response.errorBody()!!.string(), object : TypeToken<BaseResponse<String>>() {})
-                    getNavigator()?.handleError(errorResponse.data)
+                    try {
+                        val errorResponse = SharedPreferenceHelper.getObjectFromString(response.errorBody()!!.string(), object : TypeToken<BaseResponse<String>>() {})
+                        getNavigator()?.handleError(errorResponse.data)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
             }
 
@@ -46,12 +52,10 @@ class MainViewModel(linderaService: LinderaService, session: Session, dataManage
         getCompositeDisposable()?.add(getLinderaService().userPatients(object : ResponseListener<Response<BaseResponse<List<Patient>>>, String> {
             override fun onSuccess(response: Response<BaseResponse<List<Patient>>>) {
                 if (response.isSuccessful) {
-                    response.body()?.let {
-                        if (it.confirmation == "success") {
-                            val list = it.data
-                            Sort.onPatientList(list)
-                            definePatientLists(list)
-                        }
+                    response.body()?.run {
+                        val list = data
+                        Sort.onPatientList(list)
+                        definePatientLists(list)
                     }
                 } else {
                     val errorResponse = SharedPreferenceHelper.getObjectFromString(response.errorBody()!!.string(), object : TypeToken<BaseResponse<String>>() {})
@@ -70,17 +74,16 @@ class MainViewModel(linderaService: LinderaService, session: Session, dataManage
     }
 
     fun definePatientLists(list: List<Patient>) {
-        getCompositeDisposable()?.add(getDataManager()
-                .savePatientList(list)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    if (it) {
-                        getDataManager().allPatients.subscribe {
-                            Log.d("mytag", "Local Size::" + it.size)
+        getCompositeDisposable()?.run {
+            add(getDataManager().savePatientList(list)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        if (it) {
+                            Log.d("mytatg", "Successfully added")
                         }
-                    }
-                })
+                    })
+        }
 
         val archiveList = ArrayList<Patient>()
         val progressList = ArrayList<Patient>()
@@ -105,8 +108,7 @@ class MainViewModel(linderaService: LinderaService, session: Session, dataManage
             }
         }
 
-        val patientSectionList = Sort.onPatientListWithAlphabeticalSection(list)
-        getSession().setPatientList(patientSectionList)
+
         getSession().setArchiveList(archiveList)
         getSession().setProgressList(archiveList)
 

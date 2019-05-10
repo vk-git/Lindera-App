@@ -12,7 +12,8 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", "SERVICE_ENDPOINT", '"https://backend-testing.lindera.de/"')
+        //buildConfigField("String", "SERVICE_ENDPOINT", '"https://backend-testing.lindera.de/"')
+        buildConfigField("String", "SERVICE_ENDPOINT", '"https://v2-api.lindera.de/v2/"')
     }
     dataBinding {
         enabled = true
@@ -83,4 +84,6 @@ dependencies {
     // database
     implementation "androidx.room:room-rxjava2:$rootProject.roomDatabaseVersion"
     kapt "androidx.room:room-compiler:$rootProject.roomDatabaseVersion"
+
+    implementation 'io.sentry:sentry-android:1.7.16'
 }

@@ -112,6 +112,9 @@
         <item>Nursing Home Berlin</item>
     </string-array>
 
+    <string name="man">Man</string>
+    <string name="woman">Woman</string>
+
     <string-array name="gender">
         <item>Man</item>
         <item>Woman</item>
@@ -186,4 +189,8 @@
     <string name="weight">Weight</string>
     <string name="patient_living_condition">Patient living condition</string>
     <string name="does_patient_suffer_from_dementia">Does patient suffer from dementia?</string>
+    <string name="edit_patient_title">Patient</string>
+    <string name="edit_patient_edit_title">Edit Patient</string>
+    <string name="patient_edit">Edit</string>
+    <string name="patient_save">Save</string>
 </resources>

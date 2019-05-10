@@ -1,4 +1,4 @@
-package com.linderaredux.view
+package com.linderaredux.extensions
 
 import androidx.viewpager.widget.ViewPager
 

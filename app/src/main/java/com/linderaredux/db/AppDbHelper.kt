@@ -1,16 +1,18 @@
 package com.linderaredux.db
 
+import androidx.lifecycle.LiveData
 import com.linderaredux.api.response.patient.Patient
 import io.reactivex.Observable
 
 class AppDbHelper(private val mAppDatabase: AppDatabase) {
 
-    val allPatients: Observable<List<Patient>>
-        get() = Observable.fromCallable { mAppDatabase.patientDao().loadAll() }
+    val allPatients: LiveData<List<Patient>>
+        get() =  mAppDatabase.patientDao().loadAll()
 
     fun savePatientList(patientList: List<Patient>): Observable<Boolean> {
+        val newList: List<Patient> = ArrayList<Patient>(patientList)
         return Observable.fromCallable {
-            patientList.forEach {
+            newList.map {
                 insertOrUpdate(it)
             }
             true
@@ -18,12 +20,19 @@ class AppDbHelper(private val mAppDatabase: AppDatabase) {
     }
 
     private fun insertOrUpdate(item: Patient) {
-        mAppDatabase.runInTransaction {
-            val id = mAppDatabase.patientDao().getItemId(item.id)
-            if (id == null)
-                mAppDatabase.patientDao().insert(item)
-            else
-                mAppDatabase.patientDao().update(item)
+        val id = mAppDatabase.patientDao().getItemId(item.id)
+        if (id == null) {
+            mAppDatabase.patientDao().insert(item)
+        } else {
+            mAppDatabase.patientDao().update(item)
         }
+    }
+
+    fun savePatient(item: Patient) {
+        insertOrUpdate(item)
+    }
+
+    fun deletePatientById(patientId: String) {
+        mAppDatabase.patientDao().deletePatientById(patientId)
     }
 }

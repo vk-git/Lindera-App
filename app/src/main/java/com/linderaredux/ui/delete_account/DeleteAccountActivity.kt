@@ -4,11 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
 import com.linderaredux.base.BaseActivity
 import com.linderaredux.databinding.ActivityContactBinding
 import com.linderaredux.databinding.ActivityDeleteAccountBinding
+import com.linderaredux.ui.create_patient.CreatePatientViewModel
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class DeleteAccountActivity : BaseActivity<ActivityDeleteAccountBinding, DeleteAccountViewModel>(), DeleteAccountNavigator {
@@ -19,8 +22,11 @@ class DeleteAccountActivity : BaseActivity<ActivityDeleteAccountBinding, DeleteA
         }
     }
 
-    @set:Inject
-    override var viewModel: DeleteAccountViewModel? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: DeleteAccountViewModel
+        get() = ViewModelProviders.of(this, factory).get(DeleteAccountViewModel::class.java)
 
     private var mActivityDeleteAccountBinding: ActivityDeleteAccountBinding? = null
 

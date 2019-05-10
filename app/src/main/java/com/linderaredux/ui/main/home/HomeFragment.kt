@@ -15,7 +15,9 @@ import com.linderaredux.base.BaseFragment
 import com.linderaredux.databinding.FragmentHomeBinding
 import com.linderaredux.ui.choose_patient.ChoosePatientActivity
 import com.linderaredux.ui.main.MainActivity
+import com.linderaredux.ui.main.more.MoreViewModel
 import com.linderaredux.ui.terms_of_use.TermsOfUseActivity
+import com.linderaredux.utils.ViewModelProviderFactory
 import javax.inject.Inject
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNavigator {
@@ -29,8 +31,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
         }
     }
 
-    @set:Inject
-    var mViewModelFactory: ViewModelProvider.Factory? = null
+   @set:Inject
+    lateinit var factory: ViewModelProviderFactory
+
+    override val viewModel: HomeViewModel
+        get() = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
 
     @set:Inject
     var mAnalysisBoxAdapter: AnalysisBoxAdapter? = null
@@ -42,9 +47,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(), HomeNav
 
     override val layoutId: Int
         get() = R.layout.fragment_home
-
-    override val viewModel: HomeViewModel
-        get() = ViewModelProviders.of(this, mViewModelFactory).get(HomeViewModel::class.java)
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

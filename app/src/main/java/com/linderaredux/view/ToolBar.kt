@@ -9,6 +9,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.linderaredux.R
+import com.linderaredux.extensions.gone
+import com.linderaredux.extensions.visible
 
 class ToolBar : LinearLayout {
 
@@ -46,17 +48,17 @@ class ToolBar : LinearLayout {
             if (typedArray.hasValue(R.styleable.ToolBar_leftDrawable)) {
                 val leftDrawable = typedArray.getDrawable(R.styleable.ToolBar_leftDrawable)
                 toolbarLeftButton.setImageDrawable(leftDrawable)
-                toolbarLeftButton.visibility = View.VISIBLE
+                toolbarLeftButton.visible()
             } else {
-                toolbarLeftButton.visibility = View.GONE
+                toolbarLeftButton.gone()
             }
 
             if (typedArray.hasValue(R.styleable.ToolBar_rightText)) {
                 val str = typedArray.getString(R.styleable.ToolBar_rightText)
                 txtRight.text = str
-                txtRight.visibility = View.VISIBLE
+                txtRight.visible()
             } else {
-                txtRight.visibility = View.GONE
+                txtRight.gone()
             }
 
         } finally {
@@ -77,11 +79,15 @@ class ToolBar : LinearLayout {
     }
 
     fun showRightText(isShow:Boolean){
-        this.txtRight.visibility = if(isShow) View.VISIBLE else View.GONE
+        if(isShow) txtRight.visible() else txtRight.gone()
     }
 
     fun setRightText(txtRight: CharSequence) {
         this.txtRight.text = txtRight
+    }
+
+    fun getRightText():String {
+        return txtRight.text.toString()
     }
 
     fun setRightButtonListener(listener: View.OnClickListener?) {

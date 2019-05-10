@@ -13,12 +13,13 @@ import java.util.*
 
 class PatientAdapter : SectioningAdapter() {
 
-    private var patientSections: ArrayList<PatientSection>? = null
+    private var patientSections: ArrayList<PatientSection> = ArrayList()
     private lateinit var onPatientItemListener: OnPatientItemListener
 
     fun setPatientSections(patientSections: ArrayList<PatientSection>) {
-        this.patientSections = patientSections
-        notifyDataSetChanged()
+        this.patientSections.clear()
+        this.patientSections.addAll(patientSections)
+        notifyAllSectionsDataSetChanged()
     }
 
     fun setOnPatientItemListener(onPatientItemListener: OnPatientItemListener) {
@@ -26,11 +27,11 @@ class PatientAdapter : SectioningAdapter() {
     }
 
     override fun getNumberOfSections(): Int {
-        return if (patientSections != null) patientSections!!.size else 0
+        return patientSections.size
     }
 
     override fun getNumberOfItemsInSection(sectionIndex: Int): Int {
-        return patientSections!![sectionIndex].patientArrayList.size
+        return patientSections[sectionIndex].patientArrayList.size
     }
 
     override fun doesSectionHaveHeader(sectionIndex: Int): Boolean {
@@ -60,14 +61,14 @@ class PatientAdapter : SectioningAdapter() {
     }
 
     override fun onBindItemViewHolder(viewHolder: SectioningAdapter.ItemViewHolder?, sectionIndex: Int, itemIndex: Int, itemType: Int) {
-        val jobsSection = patientSections!![sectionIndex]
+        val jobsSection = patientSections[sectionIndex]
         val ivh = viewHolder as ItemViewHolder?
         val patient = jobsSection.patientArrayList[itemIndex]
         ivh!!.bind(patient)
     }
 
     override fun onBindHeaderViewHolder(headerViewHolder: SectioningAdapter.HeaderViewHolder?, sectionIndex: Int, headerType: Int) {
-        val jobsSection = patientSections!![sectionIndex]
+        val jobsSection = patientSections[sectionIndex]
         val hvh = headerViewHolder as HeaderViewHolder?
         hvh!!.titleTextView.text = jobsSection.headerTitle
     }
@@ -77,10 +78,11 @@ class PatientAdapter : SectioningAdapter() {
         fun bind(patient: Patient) {
             patientListItemBinding.patient = patient
             patientListItemBinding.itemView.setOnClickListener {
-                if(onPatientItemListener!=null){
+                if (onPatientItemListener != null) {
                     onPatientItemListener.onItemClick(patient)
                 }
             }
+
             patientListItemBinding.executePendingBindings()
         }
     }

@@ -47,6 +47,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
     abstract val viewModel: V?
 
     abstract val isFullScreen: Boolean
+    var isConnected: Boolean = false
 
     fun getViewDataBinding(): T {
         return viewDataBinding!!
@@ -64,7 +65,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
         val connectionLiveData = ConnectionLiveData(this)
         connectionLiveData.observe(this, Observer { isConnected ->
             isConnected?.let {
-                Log.d("mytag", "Internet Available:$it")
+                this.isConnected = it
             }
         })
     }
@@ -89,7 +90,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
     }
 
     override fun handleError(error: String) {
-        AlertDialog.Builder(applicationContext)
+        AlertDialog.Builder(this)
                 .setTitle("Error")
                 .setIcon(R.drawable.error)
                 .setMessage(error)
@@ -100,7 +101,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : AppComp
     }
 
     override fun onInternetConnectionError() {
-        AlertDialog.Builder(applicationContext)
+        AlertDialog.Builder(this)
                 .setTitle("Error")
                 .setIcon(R.drawable.error)
                 .setMessage(getString(R.string.please_check_your_internet_connection_or_try_again_later))

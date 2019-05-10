@@ -13,6 +13,7 @@ import com.linderaredux.db.typeconverter.AnswerquestionaireTypeConverter;
 import com.linderaredux.db.typeconverter.AnswerquestionnaireTypeConverter;
 import com.linderaredux.db.typeconverter.VideoTypeConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "patient")
@@ -43,16 +44,16 @@ public class Patient implements Parcelable {
     public String userID;
     @TypeConverters(AnalyseTypeConverter.class)
     @SerializedName("analyse")
-    public List<Analyse> analyse = null;
+    public List<Analyse> analyse = new ArrayList<>();
     @TypeConverters(AnswerquestionaireTypeConverter.class)
     @SerializedName("answerquestionaire")
-    public List<Answerquestionaire> answerquestionaire = null;
+    public List<Answerquestionaire> answerquestionaire = new ArrayList<>();
     @TypeConverters(AnswerquestionnaireTypeConverter.class)
     @SerializedName("answerquestionnaire")
-    public List<Answerquestionnaire> answerquestionnaire = null;
+    public List<Answerquestionnaire> answerquestionnaire = new ArrayList<>();
     @TypeConverters(VideoTypeConverter.class)
     @SerializedName("video")
-    public List<Video> video = null;
+    public List<Video> video = new ArrayList<>();
     public final static Parcelable.Creator<Patient> CREATOR = new Creator<Patient>() {
 
 

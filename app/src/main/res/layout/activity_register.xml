@@ -36,7 +36,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -70,18 +69,32 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                        android:id="@+id/txtPosition"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Position"
-                        android:fontFamily="@font/roboto_medium"
-                        app:met_floatingLabel="normal" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_marginTop="16dp"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
+                        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                            android:id="@+id/txtPosition"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:hint="Position"
+                            app:met_floatingLabel="normal" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="6dp"
+                            android:background="@color/white"
+                            android:src="@drawable/arrow_down" />
+                    </RelativeLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp">
 
                         <EditText
                             android:layout_width="match_parent"
@@ -101,19 +114,6 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
                             android:hint="Surname" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium"
-                            android:hint="@string/user_name" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
