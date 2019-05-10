@@ -43,7 +43,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mActivitySplashBinding = getViewDataBinding()
-        viewModel?.setNavigator(this)
+        viewModel.setNavigator(this)
 
         //Send Event
         try {
@@ -52,7 +52,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, SplashViewModel>(), S
             Sentry.capture(e)
         }
 
-        viewModel?.onTimeHandler()
+        viewModel.onTimeHandler()
     }
 
     override fun onLandingScreen() {

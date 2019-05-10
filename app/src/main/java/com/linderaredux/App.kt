@@ -2,21 +2,14 @@ package com.linderaredux
 
 import android.app.Activity
 import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.Network
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.linderaredux.dagger.DaggerAppComponent
-import com.linderaredux.utils.ConnectionLiveData
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
 import io.sentry.android.AndroidSentryClientFactory
 import io.sentry.Sentry
-
-
 
 class App : Application(), HasActivityInjector, Application.ActivityLifecycleCallbacks {
 
@@ -43,8 +36,8 @@ class App : Application(), HasActivityInjector, Application.ActivityLifecycleCal
             .inject(this)
 
         //Sentry Init
-       /* val sentryDsn = "https://0ac2d2f30caa4e26b89ef32b092bc4af@host:port/1?options"
-        Sentry.init(sentryDsn, AndroidSentryClientFactory(this))*/
+        val sentryDsn = "https://0ac2d2f30caa4e26b89ef32b092bc4af@sentry.lindera.de/4"
+        Sentry.init(sentryDsn, AndroidSentryClientFactory(this))
 
         registerActivityLifecycleCallbacks(this)
     }

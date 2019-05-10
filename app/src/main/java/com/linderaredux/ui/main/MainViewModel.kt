@@ -111,7 +111,6 @@ class MainViewModel(application: Application, linderaService: LinderaService, se
 
         getSession().setArchiveList(archiveList)
         getSession().setProgressList(archiveList)
-
         getNavigator()?.onPatientDataUpdate()
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.annotation.Nullable
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.linderaredux.BR
 import com.linderaredux.R
@@ -64,13 +65,12 @@ class PatientFragment : BaseFragment<FragmentPatientBinding, PatientViewModel>()
 
         (activity as MainActivity).updateToolbarTitle("Patients")
         (activity as MainActivity).showToolbarRightText(false)
-        //(activity as MainActivity).loadPatientsData()
+        (activity as MainActivity).loadPatientsData()
 
         viewModel?.run {
-            allPatients.observeForever { patientList ->
-                Log.d("mytag","patientList::"+patientList.size)
+            getDataManager().allPatients.observe(this@PatientFragment, Observer<List<Patient>> { patientList ->
                 setPatientData(patientList)
-            }
+            })
         }
     }
 
