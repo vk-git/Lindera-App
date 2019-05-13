@@ -60,6 +60,7 @@ class CheckBox : LinearLayout {
         } finally {
             typedArray.recycle()
         }
+
     }
 
     fun isChecked(): Boolean {

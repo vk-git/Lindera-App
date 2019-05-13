@@ -14,6 +14,26 @@ import retrofit2.Response
 
 class LinderaService(private val linderaApi: LinderaApi) {
 
+    fun userRegister(registerReq: JsonObject, listener: ResponseListener<Response<BaseResponse<AppUser>>, String>): Disposable {
+        return linderaApi.userRegister(registerReq)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<AppUser>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<AppUser>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
+
     fun userLogin(loginReq: JsonObject, listener: ResponseListener<Response<BaseResponse<AppUser>>, String>): Disposable {
         return linderaApi.userLogin(loginReq)
                 .subscribeOn(Schedulers.io())

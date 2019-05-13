@@ -14,7 +14,6 @@
 
     </data>
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -79,6 +78,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
                             android:hint="Position"
+                            android:text="Other"
                             app:met_floatingLabel="normal" />
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -92,11 +92,13 @@
                     </RelativeLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tIFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp">
 
                         <EditText
+                            android:id="@+id/etFirstName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
@@ -105,11 +107,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tILastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp">
 
                         <EditText
+                            android:id="@+id/etLastName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
@@ -118,11 +122,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tIEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp">
 
                         <EditText
+                            android:id="@+id/etEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_medium"
@@ -131,32 +137,39 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tIPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp">
 
                         <EditText
+                            android:id="@+id/etPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:inputType="textPassword"
                             android:fontFamily="@font/roboto_medium"
                             android:hint="@string/password_hint" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tIRepeatPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp">
 
                         <EditText
+                            android:id="@+id/etRepeatPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:inputType="textPassword"
                             android:fontFamily="@font/roboto_medium"
                             android:hint="Repeat password" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.linderaredux.view.CheckBox
+                        android:id="@+id/cbTermAndCondition"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
@@ -173,6 +186,7 @@
                         android:background="@drawable/register_button_bg"
                         android:fontFamily="@font/roboto_bold"
                         android:text="Register"
+                        android:onClick="@{()->viewModel.onRegisterButtonClick()}"
                         android:textAllCaps="false"
                         android:textColor="@color/white" />
 

@@ -96,5 +96,9 @@ class Validation(private val mEdittextview: EditText, private val valType: Valid
         fun isLetterInput(str: String): Boolean {
             return Pattern.compile("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]*$").matcher(str).matches()
         }
+
+        fun isMatchPassword(one: String,two: String): Boolean {
+            return two == one
+        }
     }
 }

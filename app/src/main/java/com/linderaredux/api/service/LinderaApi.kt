@@ -11,6 +11,9 @@ import retrofit2.http.*
 
 interface LinderaApi {
 
+    @POST("users")
+    fun userRegister(@Body registerReq: JsonObject): Observable<Response<BaseResponse<AppUser>>>
+
     @POST("session")
     fun userLogin(@Body loginReq: JsonObject): Observable<Response<BaseResponse<AppUser>>>
 
