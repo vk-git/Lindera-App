@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.linderaredux.api.service.LinderaService
 import com.linderaredux.db.DataManager
 import com.linderaredux.ui.change_password.ChangePasswordViewModel
+import com.linderaredux.ui.choose_home.ChooseHomeViewModel
 import com.linderaredux.ui.choose_patient.ChoosePatientViewModel
 import com.linderaredux.ui.confirm_account.ConfirmAccountViewModel
 import com.linderaredux.ui.contact.ContactViewModel
@@ -54,59 +55,35 @@ class ViewModelProviderFactory : ViewModelProvider.Factory {
     }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ChangePasswordViewModel::class.java)) {
-            return ChangePasswordViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(ChoosePatientViewModel::class.java)) {
-            return ChoosePatientViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(ConfirmAccountViewModel::class.java)) {
-            return ConfirmAccountViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(ContactViewModel::class.java)) {
-            return ContactViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(CreatePatientViewModel::class.java)) {
-            return CreatePatientViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(DeleteAccountViewModel::class.java)) {
-            return DeleteAccountViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(EditPatientViewModel::class.java)) {
-            return EditPatientViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(FacilityViewModel::class.java)) {
-            return FacilityViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(ImprintViewModel::class.java)) {
-            return ImprintViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(LandingViewModel::class.java)) {
-            return LandingViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(PrivacyPolicyViewModel::class.java)) {
-            return PrivacyPolicyViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
-            return ProfileViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
-            return RegisterViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(SplashViewModel::class.java)) {
-            return SplashViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(StartAnalysisViewModel::class.java)) {
-            return StartAnalysisViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(TermsOfUseViewModel::class.java)) {
-            return TermsOfUseViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(TutorialVideoViewModel::class.java)) {
-            return TutorialVideoViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(PatientViewModel::class.java)) {
-            return PatientViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(MoreViewModel::class.java)) {
-            return MoreViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(AnalyseViewModel::class.java)) {
-            return AnalyseViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(ArchiveViewModel::class.java)) {
-            return ArchiveViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(ProcessingViewModel::class.java)) {
-            return ProcessingViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
-        } else if (modelClass.isAssignableFrom(UploadViewModel::class.java)) {
-            return UploadViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+        when {
+            modelClass.isAssignableFrom(ChangePasswordViewModel::class.java) -> return ChangePasswordViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(ChoosePatientViewModel::class.java) -> return ChoosePatientViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(ConfirmAccountViewModel::class.java) -> return ConfirmAccountViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(ContactViewModel::class.java) -> return ContactViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(CreatePatientViewModel::class.java) -> return CreatePatientViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(DeleteAccountViewModel::class.java) -> return DeleteAccountViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(EditPatientViewModel::class.java) -> return EditPatientViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(FacilityViewModel::class.java) -> return FacilityViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(ImprintViewModel::class.java) -> return ImprintViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(LandingViewModel::class.java) -> return LandingViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> return LoginViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> return MainViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(PrivacyPolicyViewModel::class.java) -> return PrivacyPolicyViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> return ProfileViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> return RegisterViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(SplashViewModel::class.java) -> return SplashViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(StartAnalysisViewModel::class.java) -> return StartAnalysisViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(TermsOfUseViewModel::class.java) -> return TermsOfUseViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(TutorialVideoViewModel::class.java) -> return TutorialVideoViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(PatientViewModel::class.java) -> return PatientViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(MoreViewModel::class.java) -> return MoreViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> return HomeViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(AnalyseViewModel::class.java) -> return AnalyseViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(ArchiveViewModel::class.java) -> return ArchiveViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(ProcessingViewModel::class.java) -> return ProcessingViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(UploadViewModel::class.java) -> return UploadViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            modelClass.isAssignableFrom(ChooseHomeViewModel::class.java) -> return ChooseHomeViewModel(mApplication, mLinderaService, mSession, mDataManager) as T
+            else -> throw IllegalArgumentException("Unknown class name")
         }
-        throw IllegalArgumentException("Unknown class name")
     }
 }

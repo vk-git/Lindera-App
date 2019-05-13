@@ -60,6 +60,10 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding, RegisterViewModel
                 android.R.layout.simple_dropdown_item_1line, list)
         mActivityRegisterBinding!!.txtPosition.setAdapter(adapter)
 
+        mActivityRegisterBinding!!.txtChooseHome.setOnClickListener {
+
+        }
+
         mActivityRegisterBinding!!.etFirstName.addTextChangedListener(Validation(mActivityRegisterBinding!!.etFirstName, Validation.ValidationType.CompanyName))
         mActivityRegisterBinding!!.etLastName.addTextChangedListener(Validation(mActivityRegisterBinding!!.etLastName, Validation.ValidationType.CompanyName))
         mActivityRegisterBinding!!.etEmail.addTextChangedListener(Validation(mActivityRegisterBinding!!.etEmail, Validation.ValidationType.Email))

@@ -193,4 +193,6 @@
     <string name="edit_patient_edit_title">Edit Patient</string>
     <string name="patient_edit">Edit</string>
     <string name="patient_save">Save</string>
+    <string name="find_and_select_your_home">Find and select your home</string>
+    <string name="select_home_title">Select Home</string>
 </resources>

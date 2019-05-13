@@ -133,4 +133,24 @@ class LinderaService(private val linderaApi: LinderaApi) {
                     }
                 })
     }
+
+    fun userHomes(query:String,listener: ResponseListener<Response<BaseResponse<List<UserHome>>>, String>): Disposable {
+        return linderaApi.userHomes(query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : ApiResponseCallbackWrapper<Response<BaseResponse<List<UserHome>>>>() {
+
+                    override fun onSuccess(response: Response<BaseResponse<List<UserHome>>>) {
+                        listener.onSuccess(response)
+                    }
+
+                    override fun onInternetConnectionError() {
+                        listener.onInternetConnectionError()
+                    }
+
+                    override fun onFailure(error: String) {
+                        listener.onFailure(error)
+                    }
+                })
+    }
 }

@@ -23,6 +23,9 @@ interface LinderaApi {
     @GET("patients")
     fun userPatients(): Observable<Response<BaseResponse<List<Patient>>>>
 
+    @GET("homes")
+    fun userHomes(@Query("query") query:String): Observable<Response<BaseResponse<List<UserHome>>>>
+
     @POST("patients")
     fun userCreatePatient(@Body patientReq: JsonObject): Observable<Response<BaseResponse<Patient>>>
 
