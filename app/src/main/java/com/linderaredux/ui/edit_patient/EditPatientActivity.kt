@@ -73,18 +73,18 @@ class EditPatientActivity : BaseActivity<ActivityEditPatientBinding, EditPatient
             })
         }
 
-        var genderList = resources.getStringArray(R.array.gender)
-        var genderAdapter = ArrayAdapter(this,
+        val genderList = resources.getStringArray(R.array.gender)
+        val genderAdapter = ArrayAdapter(this,
                 android.R.layout.simple_dropdown_item_1line, genderList)
         mActivityEditPatientBinding!!.spinGender.setAdapter(genderAdapter)
 
-        var hospitalList = resources.getStringArray(R.array.hospital)
-        var hospitalAdapter = ArrayAdapter(this,
+        val hospitalList = resources.getStringArray(R.array.hospital)
+        val hospitalAdapter = ArrayAdapter(this,
                 android.R.layout.simple_dropdown_item_1line, hospitalList)
         mActivityEditPatientBinding!!.spinHospital.setAdapter(hospitalAdapter)
 
         patient?.run {
-            mActivityEditPatientBinding!!.etName.setText("$firstname $firstname")
+            mActivityEditPatientBinding!!.etName.setText("$firstname $lastname")
             mActivityEditPatientBinding!!.etAge.setText("$age")
             mActivityEditPatientBinding!!.spinGender.setText(getGenderWithKey(sex))
             mActivityEditPatientBinding!!.spinHospital.setText(getHospitality(sex))
